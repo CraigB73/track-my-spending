@@ -1,0 +1,1 @@
+web: gunicorn track_my_spending.wsgi

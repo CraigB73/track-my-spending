@@ -26,10 +26,10 @@
           integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
           crossorigin="anonymous"></script>
   <!-- Custom CSS -->
-  <link rel="stylesheet" type="text/css" href="{% static 'style.css'}">
-  {% block style %}
-  <!-- App styles -->
-  {% endblock style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  {% block app_styles %}
+  <!-- Add dedicated style.css -->
+  {% endblock %}
 </head>
 
 <body class="overflow-visible">

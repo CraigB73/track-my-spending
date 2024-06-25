@@ -106,8 +106,14 @@
         </div>
       </div>
   </nav>
-  <main>{% block content %} {% endblock content %}</main>
-
+  <main>
+    {% block content %}
+    <!-- Content Goes here -->
+    {% endblock content %}
+  </main>
+  <script src="{% static 'js/script.js' %}"></script>
+  {% block script %}
+  {% endblock %}
 </body>
 
 </html>

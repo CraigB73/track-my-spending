@@ -1,6 +1,104 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block app_styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'budget/css/budget_style.css' %}">
+{% endblock %}
+
 
 {% block content %}
-<h1>Budget</h1>
+<section class="container card-body d-flex flex-column budget_card mt-5 p-4 sm-w-100 lg-w-75">
+  <h1 class="display-4 text-center mb-4">Create Your Budget</h1>
+  <div class="">
+
+    <form class="needs-validation d-grid " method="post" action="">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-4">
+          <div>
+            <label class="form-label" for="{{ form.incom.id_for_label }}">Income:</label>
+          </div>
+          <div class="">
+            <input class="form-control" id="{{ form.income.id_for_label }}" type="text"
+                   name="income">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div>
+            <label class="form-label" for="{{ form.expense.id_for_label }}">Expenses:</label>
+          </div>
+          <div class="">
+            <input class="form-control" id="{{ form.expense.id_for_label }}" type="text"
+                   name="expense">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div>
+            <label class="form-label" for="{{ form.allowance.id_for_label }}">Mothly
+              Allowance:</label>
+          </div>
+          <div class="">
+            <input class="form-control" id="{{ form.allowance.id_for_label }}" type="text"
+                   name="allowance">
+          </div>
+          <div class="invalid-feedback">Please enter your allowance.</div>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-md-4">
+          <div>
+            <label class="form-label" for="{{ form.monthly_saving.id_for_label }}">Monthly
+              Savings:</label>
+          </div>
+          <div class="">
+            <input class="form-control" id="{{ form.monthly_saving.id_for_label }}" type="text"
+                   name="monthly_saving">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div>
+            <label class="form-label" for="{{ form.goal_saving.id_for_label }}">Savings
+              Goal:</label>
+          </div>
+          <div class="">
+            <input class="form-control" id="{{ form.goal_saving.id_for_label }}" type="text"
+                   name="goal_saving">
+          </div>
+        </div>
+        <div class="col">
+          <div>
+            <label class="form-label" for="{{ form.goal_saving_item.id_for_label }}">Saving
+              For:</label>
+          </div>
+          <div class="">
+            <input class="form-control" id="{{ form.goal_saving_item.id_for_label }}" type="text"
+                   name="goal_saving_item">
+          </div>
+        </div>
+        <div class="text-center pt-3">
+          <button type="submit" class="btn btn-primary mt-4 btn-lg w-50">Create
+            Budget</button>
+        </div>
+    </form>
+  </div>
+</section>
+<section class="container card budget_car mt-5 p-4 mw-50">
+  <h2>Bookkeeping Journal</h2>
+  <ul>
+    {% for budget in budgets %}
+    <li>
+      <strong>{{ budget.created_on|date:"M d, Y" }}</strong>
+      <ul>
+        <li>Income: {{ budget.income }}</li>
+        <li>Allowance: {{ total_allowance }}</li>
+        <li>Expenses: {{ budget.expenses }}</li>
+        <li>Savings: {{ total_savings }}</li>
+    </li>
+  </ul>
+  <li>No budgets saved yet.</li>
+  {% endfor %}
+  </ul>
+</section>
 {% endblock %}

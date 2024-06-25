@@ -1,6 +1,8 @@
-.section1 {
+
+/****************** Header Section ******************/
+#section-one {
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
   background-color: #36454F;
 }
 
@@ -17,6 +19,32 @@ h3 {
   font-section: 3rem;
 }
 
-.section1 {
-  height: 80vh;
+/****************** Card Section ******************/
+
+#section-two {
+  background: #6E7F80;
+  height: 100%;
+}
+
+
+/****************** Card-img w/ text button ******************/
+.img-wrapper {
+  width: 50%;
+}
+
+.img-wrapper img{
+  width: 100%;
+}
+
+
+/****************** Unorder List  ******************/
+.list-container {
+  width: 90vw;
+}
+ul .list-group {
+  
+}
+
+ul.px {
+  padding: 0 100px;
 }

@@ -13,7 +13,7 @@ def transaction_view(request):
     allowance = budget.allowance
     budget.save()
     
-    if request.methond == "POST":
+    if request.method == "POST":
         form = TransactionForm(request.POST)
         transaction = form.save(Commit=False)
         transaction.save()

@@ -1,0 +1,22 @@
+.section1 {
+  width: 100vw;
+  height: 100vh;
+  background-color: #36454F;
+}
+
+h1, h2, h3, h5, p {
+  color: #F9FAFB;
+
+}
+h1 {
+  font-size: 4rem;
+
+}
+
+h3 {
+  font-section: 3rem;
+}
+
+.section1 {
+  height: 80vh;
+}

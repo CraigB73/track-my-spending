@@ -80,7 +80,7 @@
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{% url 'budget' %}">Budget</a>
                 </li>
-                <li><a class="dropdown-item" href="{% url 'transaction' %}">transaction</a></li>
+                <li><a class="dropdown-item" href="{% url 'transaction' %}">Transaction</a></li>
               </ul>
             </li>
             <li class="nav-item">
@@ -111,6 +111,9 @@
     <!-- Content Goes here -->
     {% endblock content %}
   </main>
+  {% block footer %}
+  <!-- Footer content-->
+  {% endblock footer %}
   <script src="{% static 'js/script.js' %}"></script>
   {% block script %}
   {% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block app_styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'transaction/css/transaction_style.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="container card transaction_card mt-5 p-4">
+  <form method="post" class="needs-validation">
+    {% csrf_token %}
+    <div class="col g-3">
+      <div class="col-md-6">
+        <label for="{{ form.transaction_amount.id_for_label }}" class="form-label">Transaction
+          amount:</label>
+        <input type="text" id="{{ form.transaction_amount.id_for_label }}" class="form-control"
+               name="income" required>
+        <div class="invalid-feedback">Please enter a transaction amount.</div>
+      </div>
+      <div class="col-md-6">
+        <label for="{{ form.category_for_label }}" class="form-label">Category:</label>
+        <input type="text" id="{{ form.category.id_for_label }}" class="form-control" name="income"
+               required>
+        <div class="invalid-feedback">Please enter a location.</div>
+      </div>
+      <div <label for="{{ form.location.id_for_label }}" class="form-label">Location:</label>
+        <input type="text" id="{{ form.location.id_for_label }}" class="form-control" name="income"
+               required>
+        <div class="invalid-feedback">Please enter a location.</div>
+      </div>
+    </div>
+
+  </form>
+
+
+
+
+
+
+  {% if not allowance %}
+  <p>You need to give yourself an allowance in your <a href="{% url 'budget' %}">Budget
+      Dashboard</a>.
+  </p>
+  {% else %}
+  <form method="post">
+    <p>Current Allowance: {{ allowance }}</p>
+    <p>Remaining allowance: {{ remaining_allowance }}</p>
+    {% csrf_token %}
+    <button type="submit">Add Transaction</button>
+  </form>
+  {% endif %}
+</section>
+<h2>Previous Transaction</h2>
+<ol>
+  {% for transaction in transactions %}
+  <p>{{ transaction.created_on|date:"M d g:i a" }}</p>
+  <li>
+    <ul>
+      <li>
+        Amount: {{ transaction.transaction_amount }}
+      </li>
+      <li>
+        Location: {{ transaction.location}}
+      </li>
+      <li>
+        Category: {{ transaction.category }}
+      </li>
+    </ul>
+
+    <form action="{% url 'delete_transaction' transaction.id %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Delete</button>
+    </form>
+
+  </li>
+  {% empty %}
+  <li>No transactions yet!</li>
+  {% endfor %}
+</ol>
+{% endblock %}

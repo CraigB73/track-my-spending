@@ -16,29 +16,27 @@
     <div class="row">
       <div class="col-md-4">
         <div>
-          <label class="form-label" for="{{ form.incom.id_for_label }}">Income:</label>
+          <label class="form-label" for="income">Income:</label>
         </div>
         <div class="">
-          <input class="form-control" id="{{ form.income.id_for_label }}" type="text" name="income">
+          <input class="form-control" id="income" type="text" name="income">
         </div>
       </div>
       <div class="col-md-4">
         <div>
-          <label class="form-label" for="{{ form.expense.id_for_label }}">Expenses:</label>
+          <label class="form-label" for="expense">Expenses:</label>
         </div>
         <div class="">
-          <input class="form-control" id="{{ form.expense.id_for_label }}" type="text"
-                 name="expense">
+          <input class="form-control" id="expense" type="text" name="expense">
         </div>
       </div>
       <div class="col-md-4">
         <div>
-          <label class="form-label" for="{{ form.allowance.id_for_label }}">Mothly
+          <label class="form-label" for="allowance">Mothly
             Allowance:</label>
         </div>
         <div class="">
-          <input class="form-control" id="{{ form.allowance.id_for_label }}" type="text"
-                 name="allowance">
+          <input class="form-control" id="allowance" type="text" name="allowance">
         </div>
         <div class="invalid-feedback">Please enter your allowance.</div>
       </div>
@@ -46,32 +44,29 @@
     <div class="row ">
       <div class="col-md-4">
         <div>
-          <label class="form-label" for="{{ form.monthly_saving.id_for_label }}">Monthly
+          <label class="form-label" for="monthly_saving">Monthly
             Savings:</label>
         </div>
         <div class="">
-          <input class="form-control" id="{{ form.monthly_saving.id_for_label }}" type="text"
-                 name="monthly_saving">
+          <input class="form-control" id="monthly_saving" type="text" name="monthly_saving">
         </div>
       </div>
       <div class="col-md-4">
         <div>
-          <label class="form-label" for="{{ form.goal_saving.id_for_label }}">Savings
+          <label class="form-label" for="goal_saving">Savings
             Goal:</label>
         </div>
         <div class="">
-          <input class="form-control" id="{{ form.goal_saving.id_for_label }}" type="text"
-                 name="goal_saving">
+          <input class="form-control" id="goal_saving" type="text" name="goal_saving">
         </div>
       </div>
       <div class="col">
         <div>
-          <label class="form-label" for="{{ form.goal_saving_item.id_for_label }}">Saving
+          <label class="form-label" for="goal_saving_item">Saving
             For:</label>
         </div>
         <div class="">
-          <input class="form-control" id="{{ form.goal_saving_item.id_for_label }}" type="text"
-                 name="goal_saving_item">
+          <input class="form-control" id="goal_saving_item" type="text" name="goal_saving_item">
         </div>
       </div>
       <div class="text-center pt-3">
@@ -80,32 +75,40 @@
       </div>
   </form>
 </section>
-<section class="container card budget_car mt-5 p-4 mw-50">
+<section class="container card mt-5 px-5 py-4 mw-50 table-responsive " id="section-two">
   <h2>Bookkeeping Journal</h2>
-  <ul>
-    {% for budget in budgets %}
-    <li>
-      <strong>{{ budget.created_on|date:"M d, Y" }}</strong>
-      <ul>
-        <li>Income: {{ budget.income }}</li>
-        <li>Allowance: {{ total_allowance }}</li>
-        <li>Expenses: {{ budget.expense }}</li>
-        <li>Savings: {{ total_savings }}</li>
-    </li>
-  </ul>
-  <form action="{% url 'delete_budget' budget.id %}" method="post">
-    {% csrf_token %}
-    <button type="submit">Delete</button>
-
-  </form>
-  <form action="{% url 'update_budget' budget.id %}" method="post">
-    {% csrf_token %}
-    <button type="submit">Update</button>
-  </form>
-  {% empty %}
-  <li>No budgets saved yet.</li>
-  {% endfor %}
-  </ul>
-  </ul>
+    <table class="table table-hover ">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Income</th>
+          <th>Expenses</th>
+          <th>Savings</th>
+          <th>Allowance</th>
+          <th>Delete/Update</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for budget in budgets %}
+        <tr>
+          <td>{{ budget.created_on|date:"M d, Y" }}</td>
+          <td>{{ budget.income }}</td>
+          <td>{{ budget.expense }}</td>
+          <td>{{ budget.monthly_saving }}</td>
+          <td>{{ budget.allowance }}</td>
+          <td class="d-flex gap-2">
+            <form action="{% url 'delete_budget' budget.id %}" method="post">
+              {% csrf_token %}
+              <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+            </form>
+            <form action="{% url 'update_budget' budget.id %}" method="post">
+              {% csrf_token %}
+              <button class="btn btn-primary btn-sm " type="submit">Update</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 </section>
 {% endblock %}

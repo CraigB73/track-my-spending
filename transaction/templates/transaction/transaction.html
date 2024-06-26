@@ -54,7 +54,7 @@
     <tbody>
       {% for transaction in list_transactions %}
       <tr>
-        <td>{{ transaction.transaction.created_on }}</td>
+        <td>{{ transaction.transaction.created_on|date:"M d, Y" }}</td>
         <td>${{ transaction.amount }}</td>
         <td>{{ transaction.location }}</td>
         <td>{{ transaction.category }}</td>

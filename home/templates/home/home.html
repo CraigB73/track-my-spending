@@ -15,12 +15,12 @@
   </div>
   <div class="gap-2 d-flex flex-md-row flex-column justify-content-center w-50">
     <div class="col-md-6 col-12 mb-md-0 mb-3">
-      {% if user.is_authticated %}
-      <a class="btn btn-secondary w-100 fs-sm text-break" href="{% url 'budget' %}">Create
-        Budget</a>
+      {% if user.is_authenticated %}
+      <a class="btn btn-secondary w-100 fs-sm text-break" aria-current="page"
+         href="{% url 'budget' %}">Create Budget</a>
       {% else %}
-      <a class="btn btn-secondary w-100 fs-sm text-break" href="{% url 'account_signup' %}">Get
-        Started</a>
+      <a class="btn btn-secondary w-100 fs-sm text-break" aria-current="page"
+         href="{% url 'account_signup' %}">Get Started</a>
       {% endif %}
     </div>
     <div class="col-md-6 col-12">

@@ -42,14 +42,11 @@ def budget_view(request):
     
 def calculate_totals(field, budgets):
         return sum(getattr(budget, field) if getattr(budget, field) is not None else 0 for budget in budgets)
-
-
 @login_required
 def delete_budget(request, pk):
     budget = get_object_or_404(Budget, pk=pk, user=request.user)
     budget.delete()
     return redirect(reverse_lazy("budget"))
-
 
 @login_required
 def update_budget(request, pk):
@@ -58,9 +55,8 @@ def update_budget(request, pk):
         form = BudgetForm(request.POST, instance=budget)
         if form.is_valid():
             form.save()
-            # messages.success(request, "Your budget was updated successfully")
             return redirect("budget")
     else:
-        form = BudgetForm(instance=budget)  # Pass the instance here
+        form = BudgetForm(instance=budget)  
     return render(request, "budget/update_budget.html", {"form": form})
 

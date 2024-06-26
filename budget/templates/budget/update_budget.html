@@ -1,15 +1,79 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load crispy_forms_tags %}
+
+
+
+{% block app_styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'budget/css/budget_style.css' %}">
+{% endblock %}
+
 
 {% block content %}
-<section>
-  <h1>Update Budget</h1>
-
-  <form method="post">
+<section class="container card-body d-flex flex-column budget_card mt-5 p-4 sm-w-100 lg-w-75">
+  <h1 class="display-4 text-center mb-4">Update Your Budget</h1>
+  <form class="needs-validation d-grid " method="post" action="">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Update Budget</button>
+    <div class="row">
+      <div class="col-md-4">
+        <div>
+          <label class="form-label" for="income">Income:</label>
+        </div>
+        <div class="">
+          <input class="form-control" id="income" type="text" name="income">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div>
+          <label class="form-label" for="expense">Expenses:</label>
+        </div>
+        <div class="">
+          <input class="form-control" id="expense" type="text" name="expense">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div>
+          <label class="form-label" for="allowance">Mothly
+            Allowance:</label>
+        </div>
+        <div class="">
+          <input class="form-control" id="allowance" type="text" name="allowance">
+        </div>
+        <div class="invalid-feedback">Please enter your allowance.</div>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-md-4">
+        <div>
+          <label class="form-label" for="monthly_saving">Monthly
+            Savings:</label>
+        </div>
+        <div class="">
+          <input class="form-control" id="monthly_saving" type="text" name="monthly_saving">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div>
+          <label class="form-label" for="goal_saving">Savings
+            Goal:</label>
+        </div>
+        <div class="">
+          <input class="form-control" id="goal_saving" type="text" name="goal_saving">
+        </div>
+      </div>
+      <div class="col">
+        <div>
+          <label class="form-label" for="goal_saving_item">Saving
+            For:</label>
+        </div>
+        <div class="">
+          <input class="form-control" id="goal_saving_item" type="text" name="goal_saving_item">
+        </div>
+      </div>
+      <div class="text-center pt-3">
+        <button type="submit" class="btn btn-primary mt-4 btn-lg w-50"><a
+             href="{% url 'budget' %}">Update
+            Budget</a></button>
+      </div>
   </form>
 </section>
 

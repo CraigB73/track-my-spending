@@ -93,8 +93,19 @@
         <li>Savings: {{ total_savings }}</li>
     </li>
   </ul>
+  <form action="{% url 'delete_budget' budget.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+
+  </form>
+  <form action="{% url 'update_budget' budget.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Update</button>
+  </form>
+  {% empty %}
   <li>No budgets saved yet.</li>
   {% endfor %}
+  </ul>
   </ul>
 </section>
 {% endblock %}

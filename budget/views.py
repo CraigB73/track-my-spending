@@ -1,10 +1,12 @@
-from django.shortcuts import render, get_list_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-
+from django.contrib.auth.decorators import login_required
 from .forms import BudgetForm
 from .models import Budget
+
 # Create your views here.
 
+@login_required
 def budget_view(request):
     if request.method == "POST":
         form = BudgetForm(request.POST)
@@ -40,3 +42,25 @@ def budget_view(request):
     
 def calculate_totals(field, budgets):
         return sum(getattr(budget, field) if getattr(budget, field) is not None else 0 for budget in budgets)
+
+
+@login_required
+def delete_budget(request, pk):
+    budget = get_object_or_404(Budget, pk=pk, user=request.user)
+    budget.delete()
+    return redirect(reverse_lazy("budget"))
+
+
+@login_required
+def update_budget(request, pk):
+    budget = get_object_or_404(Budget, pk=pk, user=request.user)
+    if request.method == "POST":
+        form = BudgetForm(request.POST, instance=budget)
+        if form.is_valid():
+            form.save()
+            # messages.success(request, "Your budget was updated successfully")
+            return redirect("budget")
+    else:
+        form = BudgetForm(instance=budget)  # Pass the instance here
+    return render(request, "budget/update_budget.html", {"form": form})
+

@@ -13,6 +13,7 @@ def transaction_view(request):
     except Budget.DoesNotExist:
         return render(request, 'transaction/transaction.html')
     allowance = budget.allowance
+
     budget.save()
 
     if request.method == 'POST':
@@ -53,5 +54,8 @@ def transaction_view(request):
 
 def delete_transaction(request, pk):
     transaction = get_object_or_404(Transaction, pk=pk, user=request.user)
+    budget = Budget.objects.get(user=request.user)
+    budget.allowance += transaction.transaction_amount
+    budget.save()
     transaction.delete()
     return redirect(reverse_lazy("transaction"))

@@ -7,15 +7,15 @@
 
 {% block content %}
 <section class="container card-body mt-5 p-4 sm-w-100 lg-w-75" id="section-one">
-  <div class="container mt-1 transaction_card">
+  <div class="container  mt-1 transaction_card">
     <div class="text-center mb-3">
       <h1 class="display-2">Transactions</h1>
       <p class="fs-4">Remaining Allowance: ${{ remaining_allowance }}</p>
     </div>
-    <div class="container d-flex ">
-      <form id="transactionForm" method="post" class="col-8 ms-5 needs-validation">
+    <div class="container d-flex">
+      <form method="post" class="col-8 needs-validation">
         {% csrf_token %}
-        <div class="col-8 g-3">
+        <div class="col g-3">
           <div class="col-md-6">
             <label for="transaction_amount" class="form-label">Transaction amount:</label>
             <input type="text" id="transaction_amount" class="form-control"
@@ -33,12 +33,13 @@
             <div class="invalid-feedback">Please enter a location.</div>
           </div>
         </div>
-        <div class=" pt-3">
+        <div class="pt-3">
           <button type="submit" class="btn btn-primary">Log Transaction</button>
         </div>
       </form>
-      <div class="col">
-        <canvas class="bg-black" id="expenseChart"></canvas>
+      <div class="col-2 w-25">
+        <canvas id="myChart"></canvas>
+
       </div>
     </div>
   </div>
@@ -46,7 +47,7 @@
 </section>
 <section class="container card-body budget_card mt-5 p-4 sm-w-100 lg-w-75">
   <h2>Transaction History</h2>
-  <table class="table" id="transactionTable">
+  <table class="table">
     <thead>
       <tr>
         <th>Date</th>
@@ -57,130 +58,33 @@
       </tr>
     </thead>
     <tbody>
-      {% for transaction in transactions %}
-      <tr id="transaction-{{ transaction.id }}">
-        <td>{{ transaction.created_on|date:"M d, Y" }}</td>
-        <td>${{ transaction.transaction_amount }}</td>
+      {% for transaction in list_transactions %}
+      <tr>
+        <td>{{ transaction.transaction.created_on|date:"M d, Y" }}</td>
+        <td>${{ transaction.amount }}</td>
         <td>{{ transaction.location }}</td>
         <td>{{ transaction.category }}</td>
         <td>
-          <button class="delete-button btn btn-danger" data-id="{{ transaction.id }}"
-                  data-url="{% url 'delete_transaction' transaction.id %}">Delete</button>
+          <form method="post" action="{% url 'delete_transaction' transaction.transaction.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
         </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+  </div>
 </section>
-
 {% endblock %}
+
 {% block script %}
-<script>
-  $(document).ready(function () {
-    const ctx = document.getElementById('expenseChart').getContext('2d');
-    let expenseChart = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Total Transactions'],
-        options: {
 
-        },
-        datasets: [{
-          label: 'Total',
-          data: [],
-          backgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 206, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(153, 99, 255)',
-            'rgb(255, 159, 64)'
-          ],
-          borderColor: [
-            'rgba(110, 127, 128, 0.3)',
-
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: true, 
-        aspectRatio: 1, 
-        animations: {
-          duration: 500, 
-          easing: 'linear'
-        },
-        plugins: {
-          legend: {
-            labels: {
-              color: 'red',
-              font: {
-                size: 18,
-              },
-            },
-            position: 'right',
-            align: 'center'
-          },
-        },
-      }
-    });
-
-    function updateChart() {
-      $.ajax({
-        url: '{% url "chart_data" %}',
-        method: 'GET',
-        success: function (data) {
-          expenseChart.data.labels = data.labels;
-          expenseChart.data.datasets[0].data = data.data;
-          expenseChart.update();
-        }
-      });
-    }
-
-    updateChart();
-
-    $('#transactionForm').on('submit', function (e) {
-      e.preventDefault();
-      $.ajax({
-        url: $(this).attr('action'),
-        method: $(this).attr('method'),
-        data: $(this).serialize(),
-        success: function (response) {
-          if (response.status === 'success') {
-            updateChart();
-            $('#transactionForm')[0].reset(); 
-            location.reload();
-          }
-        }
-      });
-    });
-
-    $('#transactionTable').on('click', '.delete-button', function () {
-      const transactionId = $(this).data('id');
-      const urlPattern = $(this).data('url');
-      const deleteTransactionUrl = urlPattern.replace('1', transactionId);
-      console.log(deleteTransactionUrl); 
-      $.ajax({
-        url: deleteTransactionUrl,
-        method: 'POST',
-        data: {
-          csrfmiddlewaretoken: '{{ csrf_token }}',
-          pk: transactionId 
-        },
-        success: function (response) {
-          if (response.status === 'success') {
-            $(`#transaction-${transactionId}`).remove();
-            updateChart(); 
-          }
-        },
-        error: function (xhr, status, error) {
-          console.error('AJAX request failed:', status, error);
-        }
-      });
-    });
-  });
-</script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+
+</script>
+
 <script src="{% static 'transaction/js/transaction_script.js' %}"></script>
 {% endblock %}

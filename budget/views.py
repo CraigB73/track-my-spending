@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from datetime import datetime
 from .forms import BudgetForm
 from .models import Budget
 
@@ -8,7 +10,15 @@ from .models import Budget
 
 @login_required
 def budget_view(request):
+    current_month = datetime.now().month
+    current_year =  datetime.now().year
+
+    existing_budget = Budget.objects.filter(user=request.user, created_on__year=current_year, created_on__month=current_month).exists()
+
     if request.method == "POST":
+        if existing_budget:
+            messages.error(request, "You can only create one budget per month.")
+            return redirect("budget")
         form = BudgetForm(request.POST)
         if form.is_valid():
             budget = form.save(commit=False)
@@ -16,8 +26,12 @@ def budget_view(request):
             budget.save()
             return redirect("budget")
     else:
-        form = BudgetForm()
-       
+        if existing_budget:
+            budgets = Budget.objects.filter(user=request.user, created_on__year=current_year, created_on__month=current_month)
+            form = BudgetForm(instance=budgets.first())
+        else:
+            form = BudgetForm()
+
     budgets = Budget.objects.filter(user=request.user).order_by("-created_on") 
     # Calculate input totals to redender in a list
     total_income = calculate_totals('income', budgets)
@@ -49,22 +63,18 @@ def delete_budget(request, pk):
     budget.delete()
     return redirect(reverse_lazy("budget"))
 
+
 @login_required
 def update_budget(request, pk):
     budget = get_object_or_404(Budget, pk=pk, user=request.user)
+    
     if request.method == "POST":
         form = BudgetForm(request.POST, instance=budget)
         if form.is_valid():
-            budget = Budget.objects.get(id=request.user.id)  # assuming the budget is associated with the user
-            budget.income = form.cleaned_data['income']
-            budget.expense = form.cleaned_data['expense']
-            budget.allowance = form.cleaned_data['allowance']
-            budget.monthly_saving = form.cleaned_data['monthly_saving']
-            budget.goal_saving = form.cleaned_data['goal_saving']
-            budget.goal_saving_item = form.cleaned_data['goal_saving_item']
-            budget.save()
-            return redirect('budget') 
+            form.save()
+            return redirect('budget')  # Change to the appropriate redirect URL
     else:
-        form = BudgetForm(instance=budget)  
+        form = BudgetForm(instance=budget)
+        
     return render(request, "budget/update_budget.html", {"form": form})
 

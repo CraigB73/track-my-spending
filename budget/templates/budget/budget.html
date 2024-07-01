@@ -19,7 +19,7 @@
           <label class="form-label" for="income">Income:</label>
         </div>
         <div class="">
-          <input class="form-control" id="income" type="text" name="income">
+          {{ form.income }}
         </div>
       </div>
       <div class="col-md-4">
@@ -27,7 +27,7 @@
           <label class="form-label" for="expense">Expenses:</label>
         </div>
         <div class="">
-          <input class="form-control" id="expense" type="text" name="expense">
+          {{ form.expense }}
         </div>
       </div>
       <div class="col-md-4">
@@ -36,7 +36,7 @@
             Allowance:</label>
         </div>
         <div class="">
-          <input class="form-control" id="allowance" type="text" name="allowance">
+          {{ form.allowance }}
         </div>
         <div class="invalid-feedback">Please enter your allowance.</div>
       </div>
@@ -48,7 +48,7 @@
             Savings:</label>
         </div>
         <div class="">
-          <input class="form-control" id="monthly_saving" type="text" name="monthly_saving">
+          {{ form.monthly_saving }}
         </div>
       </div>
       <div class="col-md-4">
@@ -57,7 +57,7 @@
             Goal:</label>
         </div>
         <div class="">
-          <input class="form-control" id="goal_saving" type="text" name="goal_saving">
+          {{ form.goal_saving }}
         </div>
       </div>
       <div class="col">
@@ -66,49 +66,49 @@
             For:</label>
         </div>
         <div class="">
-          <input class="form-control" id="goal_saving_item" type="text" name="goal_saving_item">
+          {{ form.goal_saving_item }}
         </div>
       </div>
       <div class="text-center pt-3">
-        <button type="submit" class="btn btn-primary mt-4 btn-lg w-50">Create
-          Budget</button>
+        <button type="submit" class="btn btn-primary mt-4 btn-lg w-50"><a
+             href="{% url 'budget' %}">Create Budget</a></button>
       </div>
   </form>
 </section>
 <section class="container card mt-5 px-5 py-4 mw-50 table-responsive " id="section-two">
   <h2>Bookkeeping Journal</h2>
-    <table class="table table-hover ">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Income</th>
-          <th>Expenses</th>
-          <th>Savings</th>
-          <th>Allowance</th>
-          <th>Delete/Update</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for budget in budgets %}
-        <tr>
-          <td>{{ budget.created_on|date:"M d, Y" }}</td>
-          <td>{{ budget.income }}</td>
-          <td>{{ budget.expense }}</td>
-          <td>{{ budget.monthly_saving }}</td>
-          <td>{{ budget.allowance }}</td>
-          <td class="d-flex gap-2">
-            <form action="{% url 'delete_budget' budget.id %}" method="post">
-              {% csrf_token %}
-              <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-            </form>
-            <form action="{% url 'update_budget' budget.id %}" method="post">
-              {% csrf_token %}
-              <button class="btn btn-primary btn-sm " type="submit">Update</button>
-            </form>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+  <table class="table table-hover ">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Income</th>
+        <th>Expenses</th>
+        <th>Savings</th>
+        <th>Allowance</th>
+        <th>Delete/Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for budget in budgets %}
+      <tr>
+        <td>{{ budget.created_on|date:"M d, Y" }}</td>
+        <td>{{ budget.income }}</td>
+        <td>{{ budget.expense }}</td>
+        <td>{{ budget.monthly_saving }}</td>
+        <td>{{ budget.allowance }}</td>
+        <td class="d-flex gap-2">
+          <form action="{% url 'delete_budget' budget.id %}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+          </form>
+          <form action="{% url 'update_budget' budget.id %}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-primary btn-sm " type="submit">Update</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </section>
 {% endblock %}

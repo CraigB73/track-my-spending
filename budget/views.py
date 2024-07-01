@@ -42,6 +42,7 @@ def budget_view(request):
     
 def calculate_totals(field, budgets):
         return sum(getattr(budget, field) if getattr(budget, field) is not None else 0 for budget in budgets)
+
 @login_required
 def delete_budget(request, pk):
     budget = get_object_or_404(Budget, pk=pk, user=request.user)
@@ -54,8 +55,15 @@ def update_budget(request, pk):
     if request.method == "POST":
         form = BudgetForm(request.POST, instance=budget)
         if form.is_valid():
-            form.save()
-            return redirect("budget")
+            budget = Budget.objects.get(id=request.user.id)  # assuming the budget is associated with the user
+            budget.income = form.cleaned_data['income']
+            budget.expense = form.cleaned_data['expense']
+            budget.allowance = form.cleaned_data['allowance']
+            budget.monthly_saving = form.cleaned_data['monthly_saving']
+            budget.goal_saving = form.cleaned_data['goal_saving']
+            budget.goal_saving_item = form.cleaned_data['goal_saving_item']
+            budget.save()
+            return redirect('budget') 
     else:
         form = BudgetForm(instance=budget)  
     return render(request, "budget/update_budget.html", {"form": form})

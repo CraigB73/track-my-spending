@@ -1,65 +1,78 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block app_styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'about/css/about_style.css' %}">
+{% endblock %}
+
+s
 {% block content %}
 
-<div style="color: white;" class="container">
-  <h1>About</h1>
-  <p>
-    Take control of your financial future with Track My Spending (TMS), the ultimate tool for
-    mastering your money! We believe that managing your finances should be easy, intuitive, and
-    motivating.Our web app is designed to help you make sense of your spending, create a budget that
-    works for you, and achieve your financial goals.
-    <br>
-    With TMS, creating a budget and tracking your expenses is a breeze. Our user-friendly interface
-    allows you to easily categorize your expenses, set financial goals, and receive personalized
-    recommendations to help you stay on track. Whether you're saving for a big-ticket item, paying
-    off debt, or simply building an emergency fund, our app provides the tools and motivation you
-    need to succeed.
-    <br>
-    Our app is built on the principles of simplicity, flexibility, and motivation. We believe that
-    managing your money should be a positive experience, not a chore. That's why we've designed TMS
-    to be easy and rewarding to use as you reach your financial milestones. With TMS, you'll be
-    motivated to save more, spend wisely, and achieve your financial goals.
-    <br>
-    By using TMS, you'll be able to easily create, track, manage, and save your money. Our app will
-    help you stay motivated and focused on your financial goals, and provide you with the tools and
-    insights you need to make informed financial decisions. So why wait? Sign up today and start
-    taking control of your finances!
-  </p>
-  <h2>Visualize Your Transaction</h2>
-  <p>
-    [Image of a pie chart with the following sections and percentages: 40% - Housing (Rent/Mortgage,
-    Utilities) 25% - Transportation (Car Loan, Gas, Insurance) 15% - Food (Groceries, Dining Out)
-    10% -
-    Entertainment (Movies, Concerts, Hobbies) 10% - Savings (Emergency Fund, Retirement)<br><br>
+<section class="d-flex justify-content-center ">
+  <div style="color: white;"
+       class="h-100 card-body d-flex flex-column about_card w-75 m-5 p-5 container">
+    <h1 class="mb-5 text-center">About</h1>
+    <p>
+      <span class="fs-5">T</span>ake control of your financial future with Track My Spending (TMS),
+      the ultimate tool for
+      mastering your money! We believe that managing your finances should be easy, intuitive, and
+      motivating.Our web app is designed to help you make sense of your spending, create a budget
+      that
+      works for you, and achieve your financial goals.
+    </p>
+    <p>
+      With TMS, creating a budget and tracking your expenses is a breeze. Our user-friendly
+      interface
+      allows you to easily categorize your expenses, set financial goals, and receive personalized
+      recommendations to help you stay on track. Whether you're saving for a big-ticket item, paying
+      off debt, or simply building an emergency fund, our app provides the tools and motivation you
+      need to succeed.</p>
 
-    Using a pie chart to visualize your transactions can help you:
-    <br><br>
-  <ul>
-    <li>Easily identify areas where you can cut back and optimize your spending</li>
-    <li>Understand how your expenses are allocated across different categories</li>
-    <li>Make informed decisions about where to allocate your money</li>
-    <li>Set realistic financial goals and track your progress</li>
-    <li>Stay motivated and focused on your financial objectives</li>
-  </ul>
+    <p>
+      Our app is built on the principles of simplicity, flexibility, and motivation. We believe that
+      managing your money should be a positive experience, not a chore. That's why we've designed
+      TMS
+      to be easy and rewarding to use as you reach your financial milestones. With TMS, you'll be
+      motivated to save more, spend wisely, and achieve your financial goals.
+    </p>
+    <p>By using TMS, you'll be able to easily create, track, manage, and save your money. Our
+      app
+      will
+      help you stay motivated and focused on your financial goals, and provide you with the tools
+      and
+      insights you need to make informed financial decisions. So why wait? Sign up today and start
+      taking control of your finances!
+    </p>
+    <div class=" mt-3">
+      <div class="row">
+        <div class="col-lg-10 pt-4 pt-lg-0">
+          <img class="float-end imgshadow  w-25" alt="Image"
+               src="{% static 'about/images/piechart.png' %}">
+          <h2 class="">Visualize Your Transaction</h2>
 
+          <p>Using a pie chart to visualize your transactions can help you:</p>
 
+          <ul class="mb-0">
+            <li>Easily identify areas where you can cut back and optimize your spending</li>
+            <li>Understand how your expenses are allocated across different categories</li>
+            <li>Make informed decisions about where to allocate your money</li>
+            <li>Set realistic financial goals and track your progress</li>
+            <li>Stay motivated and focused on your financial objectives</li>
+          </ul>
+          <p class="pt-2">
+            By using TMS, you'll be able to easily create, track, manage, and save your money. Our
+            app will help you stay motivated and focused on your financial goals, and provide you
+            with
+            the tools and insights you need to make informed financial decisions. So why wait? Sign
+            up
+            today and
+            start taking control of your finances!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-
-
-  By using TMS, you'll be able to easily create, track, manage, and save your money. Our app will
-  help
-  you stay motivated and focused on your financial goals, and provide you with the tools and
-  insights
-  you need to make informed financial decisions. So why wait? Sign up today and start taking
-  control
-  of your finances!
-
-  The additional section highlights the benefits of using a pie chart to visualize transactions,
-  making it easier for users to understand their spending habits and make informed financial
-  decisions.
-  </p>
-</div>
 
 {% endblock %}

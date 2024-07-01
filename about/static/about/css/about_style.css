@@ -1,0 +1,9 @@
+.about_card {
+  border-radius: 25px;
+  background:  rgba(110, 127, 128, 0.7);
+  box-shadow: 0 4px 6px 0 rgba(227, 231, 238, 0.7), 0 2px 20px 0 rgba(227, 231, 238, 0.7);
+}
+
+h1 {
+  font-size: 4rem;
+}

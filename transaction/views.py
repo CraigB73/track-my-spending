@@ -31,6 +31,8 @@ def transaction_view(request):
     transactions = Transaction.objects.filter(user = request.user).order_by("-created_on")
     total_transactions = sum(transaction.transaction_amount for transaction in transactions )
     
+    
+    global allowance_remaining 
     allowance_remaining = allowance - total_transactions
     
     list_transactions = []
@@ -56,7 +58,8 @@ def transaction_view(request):
 def delete_transaction(request, pk):
     transaction = get_object_or_404(Transaction, pk=pk, user=request.user)
     budget = Budget.objects.get(user=request.user)
-    budget.allowance += transaction.transaction_amount
+    if ( allowance_remaining < budget.allowance ):
+        transaction.transaction_amount += allowance_remaining
     budget.save()
     transaction.delete()
     return redirect(reverse_lazy("transaction"))

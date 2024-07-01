@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import budget_view, delete_budget, update_budget
+from .views import BudgetView, DeleteBudgetView, UpdateBudgetView
 
 urlpatterns = [
-    path('', budget_view, name='budget'),
-    path('budgets/<pk>/delete/', delete_budget, name='delete_budget'),
-    path('update_budget/<pk>/', update_budget, name='update_budget'),
+    path('', BudgetView.as_view(), name='budget'),
+    path('budgets/<pk>/delete/', DeleteBudgetView.as_view(), name='delete_budget'),
+    path('update_budget/<pk>/', UpdateBudgetView.as_view(), name='update_budget'),
 ]

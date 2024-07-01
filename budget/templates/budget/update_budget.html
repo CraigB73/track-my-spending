@@ -17,16 +17,18 @@
         <div>
           <label class="form-label" for="income">Income:</label>
         </div>
-        <div class="">
+        <div>
           {{ form.income }}
+          <p>Current income: {{ object.income }}</p>
         </div>
       </div>
       <div class="col-md-4">
         <div>
           <label class="form-label" for="expense">Expenses:</label>
         </div>
-        <div class="">
+        <div>
           {{ form.expense }}
+          <p>Current expense: {{ object.expense }}</p>
         </div>
       </div>
       <div class="col-md-4">
@@ -34,20 +36,22 @@
           <label class="form-label" for="allowance">Mothly
             Allowance:</label>
         </div>
-        <div class="">
+        <div>
           {{ form.allowance }}
+          <p>Current allowance: {{ object.allowance }}</p>
         </div>
         <div class="invalid-feedback">Please enter your allowance.</div>
       </div>
     </div>
-    <div class="row ">
+    <div class="row">
       <div class="col-md-4">
         <div>
           <label class="form-label" for="monthly_saving">Monthly
             Savings:</label>
         </div>
-        <div class="">
+        <div>
           {{ form.monthly_saving }}
+          <p>Current savings: {{ object.monthly_saving}}</p>
         </div>
       </div>
       <div class="col-md-4">
@@ -55,8 +59,9 @@
           <label class="form-label" for="goal_saving">Savings
             Goal:</label>
         </div>
-        <div class="">
+        <div>
           {{ form.goal_saving }}
+          <p>Current goal savings: {{ object.goal_saving }}</p>
         </div>
       </div>
       <div class="col">
@@ -64,13 +69,13 @@
           <label class="form-label" for="goal_saving_item">Saving
             For:</label>
         </div>
-        <div class="">
+        <div>
           {{ form.goal_saving_item }}
+          <p>Saving for: {{ object.goal_saving_item }}</p>
         </div>
       </div>
       <div class="text-center pt-3">
-        <button type="submit" class="btn btn-primary mt-4 btn-lg w-50"><a
-             href="{% url 'budget' %}">Update Budget</a></button>
+        <button type="submit" class="btn btn-primary mt-4 btn-lg w-50">Update Budget</button>
       </div>
   </form>
 </section>

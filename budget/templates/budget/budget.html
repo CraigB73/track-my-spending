@@ -70,6 +70,13 @@
         </div>
       </div>
       <div class="text-center pt-3">
+        {% if messages %}
+        {% for message in messages %}
+        <div  class="text-warning alert alert-{{ message.tags }}">
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
         <button type="submit" class="btn btn-primary mt-4 btn-lg w-50"><a
              href="{% url 'budget' %}">Create Budget</a></button>
       </div>
@@ -85,6 +92,13 @@
         <th>Expenses</th>
         <th>Savings</th>
         <th>Allowance</th>
+        {% for budget in budgets %}
+        {% if budget.goal_saving %}
+        <th>Saving for:<br> <span>{{ budget.goal_saving_item}}</span> </th>
+        {% else %}
+        <th></th>
+        {% endif %}
+        {% endfor %}
         <th>Delete/Update</th>
       </tr>
     </thead>
@@ -96,6 +110,11 @@
         <td>{{ budget.expense }}</td>
         <td>{{ budget.monthly_saving }}</td>
         <td>{{ budget.allowance }}</td>
+        {% if budget.goal_saving %}
+        <td>{{ budget.goal_saving}}</td>
+        {% else %}
+        <td></td>
+        {% endif %}
         <td class="d-flex gap-2">
           <form action="{% url 'delete_budget' budget.id %}" method="post">
             {% csrf_token %}

@@ -47,6 +47,8 @@ class BudgetView(View):
             "goal_saving_item": goal_saving_item,
             "saved": True
         })
+        
+        
     """
     Checks for existiing current month budget.
     Displays message if User tries to create a budget in the curret month more that once.

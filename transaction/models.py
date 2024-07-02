@@ -9,7 +9,7 @@ Used to track and save transaction details
 '''
 class Transaction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="transaction", null=True, blank=True)
-    transaction_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    transaction_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=False)
     location = models.CharField(max_length=150, null=True, blank=True)
     category = models.CharField(max_length=150, null=True, blank=False)
     created_on = models.DateTimeField(auto_now_add=True)

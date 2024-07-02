@@ -18,7 +18,7 @@
         <div>
           <label class="form-label" for="income">Income:</label>
         </div>
-        <div class="">
+        <div>
           {{ form.income }}
         </div>
       </div>
@@ -26,7 +26,7 @@
         <div>
           <label class="form-label" for="expense">Expenses:</label>
         </div>
-        <div class="">
+        <div >
           {{ form.expense }}
         </div>
       </div>
@@ -35,19 +35,19 @@
           <label class="form-label" for="allowance">Mothly
             Allowance:</label>
         </div>
-        <div class="">
+        <div >
           {{ form.allowance }}
         </div>
         <div class="invalid-feedback">Please enter your allowance.</div>
       </div>
     </div>
-    <div class="row ">
+    <div class="row">
       <div class="col-md-4">
         <div>
           <label class="form-label" for="monthly_saving">Monthly
             Savings:</label>
         </div>
-        <div class="">
+        <div>
           {{ form.monthly_saving }}
         </div>
       </div>
@@ -56,7 +56,7 @@
           <label class="form-label" for="goal_saving">Savings
             Goal:</label>
         </div>
-        <div class="">
+        <div>
           {{ form.goal_saving }}
         </div>
       </div>
@@ -65,14 +65,14 @@
           <label class="form-label" for="goal_saving_item">Saving
             For:</label>
         </div>
-        <div class="">
+        <div>
           {{ form.goal_saving_item }}
         </div>
       </div>
       <div class="text-center pt-3">
         {% if messages %}
         {% for message in messages %}
-        <div  class="text-warning alert alert-{{ message.tags }}">
+        <div class="text-warning alert alert-{{ message.tags }} mb-0">
           {{ message }}
         </div>
         {% endfor %}

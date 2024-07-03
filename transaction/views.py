@@ -4,11 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from .models import Transaction, Budget
 from .forms import TransactionForm
+from django.views.decorators.http import require_GET
+from django.db.models import Sum
 
 # Create your views here.
 @login_required
 def transaction_view(request):   
-    #Gets the allowance created in the Budget model for authorized user
     try:
         budget = Budget.objects.get(user=request.user)
     except Budget.DoesNotExist:
@@ -63,3 +64,17 @@ def delete_transaction(request, pk):
     budget.save()
     transaction.delete()
     return redirect(reverse_lazy("transaction"))
+
+
+@require_GET
+@login_required
+def get_transaction_data(request):
+    transactions = Transaction.objects.filter(user=request.user)
+    aggregated_data = transactions.values('category').annotate(total_amount=Sum('transaction_amount'))
+    
+    transaction_data = {
+        'labels': [data['category'] for data in aggregated_data],
+        'data': [data['total_amount'] for data in aggregated_data]
+    }
+    
+    return JsonResponse(transaction_data)

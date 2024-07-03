@@ -6,91 +6,101 @@
 {% endblock %}
 
 {% block content %}
-<section class="container card-body mt-5 p-4 md-w-50 lg-w-100" id="section-one">
-  <div class="container  mt-1 transaction_card ">
-    <div class="text-center mb-3">
-      <h1 class="display-2">Transactions</h1>
-      <p class="fs-4">Remaining Allowance: ${{ remaining_allowance }}</p>
-    </div>
-    <div class="container d-flex justify-content-around">
-      <form method="post" class="col-8 flex-column needs-validation w-100 mb-0">
-        {% csrf_token %}
-        <div class=" d-flex col g-3">
-          <div class="flex-column w-100">
-            <div class="col-6">
-              <div>
-                <label for="transaction_amount" class="form-label">Transaction
-                  amount:</label>
+<main class="mx-sm-3">
+  <section class="container card-body mt-5 p-4  md-w-50" id="section-one">
+    <div class="container  mt-1 transaction_card ">
+      <div class="text-center mb-3">
+        <h1 class="display-2">Transactions</h1>
+        <p class="fs-4">Remaining Allowance: ${{ remaining_allowance }}</p>
+      </div>
+      <div class="container d-flex justify-content-around flex-fill">
+        <form method="post" class="col-8 flex-column needs-validation w-100 mb-0">
+          {% csrf_token %}
+          <div class=" d-flex col g-3">
+            <div class="flex-column w-100">
+              <div class="col-6">
+                <div>
+                  <label for="transaction_amount" class="form-label">Transaction
+                    amount:</label>
+                </div>
+                <div>
+                  {{ form.transaction_amount }}
+                </div>
+                <div class=" invalid-feedback">Please enter a transaction amount.
+                </div>
               </div>
-              <div>
-                {{ form.transaction_amount }}
+              <div class="col-6">
+                <div>
+                  <label for="category" class="form-label">Category:</label>
+                </div>
+                <div>
+                  {{ form.category }}
+                </div>
+                <div class="invalid-feedback">Please enter a category.</div>
               </div>
-              <div class=" invalid-feedback">Please enter a transaction amount.
+              <div class="col-6">
+                <div>
+                  <label for="location" class="form-label">Location:</label>
+                </div>
+                <div>
+                  {{ form.location }}
+                </div>
+                <div class="invalid-feedback">Please enter a location.</div>
               </div>
             </div>
-            <div class="col-6">
-              <div>
-                <label for="category" class="form-label">Category:</label>
-              </div>
-              <div>
-                {{ form.category }}
-              </div>
-              <div class="invalid-feedback">Please enter a category.</div>
-            </div>
-            <div class="col-6">
-              <div>
-                <label for="location" class="form-label">Location:</label>
-              </div>
-              <div>
-                {{ form.location }}
-              </div>
-              <div class="invalid-feedback">Please enter a location.</div>
+            <div class="col-7 w-25 mx-5">
+
+              {% if not list_transactions %}
+              <p class="mt-0 fs-5">You Have No Transactions</p>
+              <img src="{% static 'transaction/images/chart.png' %}" alt="">
+              {% else %}
+              <canvas id="myChart"></canvas>
+              {% endif %}
             </div>
           </div>
-          <div class="col-6 w-25 mx-5">
-            <canvas id="myChart"></canvas>
+          <div class="pt-1 mt-0">
+            <button type="submit" class="btn btn-primary">Log Transaction</button>
           </div>
-        </div>
-        <div class="pt-1 mt-0">
-          <button type="submit" class="btn btn-primary">Log Transaction</button>
-        </div>
-      </form>
+        </form>
 
+      </div>
     </div>
-  </div>
+  </section>
 
-</section>
-<section class="container card-body budget_card mt-5 p-4 sm-w-100 lg-w-75">
-  <h2>Transaction History</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Amount</th>
-        <th>Location</th>
-        <th>Category</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for transaction in list_transactions %}
-      <tr>
-        <td>{{ transaction.transaction.created_on|date:"M d, Y" }}</td>
-        <td>${{ transaction.amount }}</td>
-        <td>{{ transaction.location }}</td>
-        <td>{{ transaction.category }}</td>
-        <td>
-          <form method="post" action="{% url 'delete_transaction' transaction.transaction.pk %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger btn-sm ">Delete</button>
-          </form>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  </div>
-</section>
+  <section class="container card-body budget_card mt-5 p-4 sm-w-100 lg-w-75">
+    <div class="table-responsive-md">
+      <h2>Transaction History</h2>
+      <table class="table">
+        <thead class="table-secondary">
+          <tr>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Location</th>
+            <th>Category</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody class="table-striped">
+          {% for transaction in list_transactions %}
+          <tr>
+            <td>{{ transaction.transaction.created_on|date:"M d, Y" }}</td>
+            <td>${{ transaction.amount }}</td>
+            <td>{{ transaction.location }}</td>
+            <td>{{ transaction.category }}</td>
+            <td>
+              <form method="post"
+                    action="{% url 'delete_transaction' transaction.transaction.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm ">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
 {% endblock %}
 
 {% block script %}

@@ -9,7 +9,8 @@ from django.db.models import Sum
 
 # Create your views here.
 @login_required
-def transaction_view(request):   
+def transaction_view(request): 
+    #Queries the budget model to use allowance created within the budget  
     try:
         budget = Budget.objects.get(user=request.user)
     except Budget.DoesNotExist:
@@ -33,9 +34,12 @@ def transaction_view(request):
     total_transactions = sum(transaction.transaction_amount for transaction in transactions )
     
     
-    global allowance_remaining 
+    global allowance_remaining #Enable to use varible in delete_transaction to add back transaction
     allowance_remaining = allowance - total_transactions
     
+    """
+    Creates a list to be render in the table
+    """
     list_transactions = []
     for transaction in transactions:
         list_transactions.append({
@@ -55,7 +59,9 @@ def transaction_view(request):
             "list_transactions": list_transactions,
             "saved": True
             })
-
+"""
+Upond deletion transaction will be removed from table row and update 
+the allowance by returning the transaction amount back to remaining_allowance"""
 def delete_transaction(request, pk):
     transaction = get_object_or_404(Transaction, pk=pk, user=request.user)
     budget = Budget.objects.get(user=request.user)
@@ -66,15 +72,20 @@ def delete_transaction(request, pk):
     return redirect(reverse_lazy("transaction"))
 
 
+"""
+Retrieves data from the transaction model which is used to 
+dynamically updated the Chart.js pie chart.
+"""
 @require_GET
 @login_required
 def get_transaction_data(request):
     transactions = Transaction.objects.filter(user=request.user)
+    # Get each cateory and totals the transactions of that each category(with help of ChatGPT)
     aggregated_data = transactions.values('category').annotate(total_amount=Sum('transaction_amount'))
-    
+    #Creates obj of list to be passed to pie chart
     transaction_data = {
         'labels': [data['category'] for data in aggregated_data],
         'data': [data['total_amount'] for data in aggregated_data]
     }
     
-    return JsonResponse(transaction_data)
+    return JsonResponse(transaction_data)#return a JSON reponse when making an API call in transaction_script.js

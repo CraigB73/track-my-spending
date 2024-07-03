@@ -1,5 +1,4 @@
-console.log('test')  
-
+document.addEventListener("DOMContentLoaded", function () {
 const ctx = document.getElementById('myChart').getContext('2d');
   let myChart = new Chart(ctx, {
     type: 'doughnut',
@@ -50,10 +49,15 @@ const ctx = document.getElementById('myChart').getContext('2d');
   async function updateChart() {
     const response = await fetch('transaction/chart-data/');
     const data = await response.json();
-
-    myChart.data.labels = data.labels;
-    myChart.data.datasets[0].data = data.data;
-    myChart.update();
+    try {
+      myChart.data.labels = data.labels;
+      myChart.data.datasets[0].data = data.data;
+      myChart.update();
+    } catch (error) {
+      throw error  
+    }
+   
   }
 
-  document.addEventListener('DOMContentLoaded', updateChart);
+  updateChart()
+})

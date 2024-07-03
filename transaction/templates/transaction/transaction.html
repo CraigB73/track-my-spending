@@ -94,34 +94,6 @@
 {% endblock %}
 
 {% block script %}
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-  const ctx = document.getElementById('myChart').getContext('2d');
-  let myChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: [],
-      datasets: [{
-        label: '# of Transactions',
-        data: [],
-        borderWidth: 1
-      }]
-    },
-    options: {}
-  });
-
-  async function updateChart() {
-    const response = await fetch('transaction/chart-data/');
-    const data = await response.json();
-
-    myChart.data.labels = data.labels;
-    myChart.data.datasets[0].data = data.data;
-    myChart.update();
-  }
-
-  document.addEventListener('DOMContentLoaded', updateChart);
-</script>
-
-<script src="{% static 'transaction/js/transaction_script.js' %}"></script>
+<script defer src="{% static 'transaction/js/transaction_script.js' %}"></script>
 {% endblock %}

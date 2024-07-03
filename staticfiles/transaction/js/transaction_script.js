@@ -1,3 +1,9 @@
+
+window.onload = function() {
+  document.getElementById('id_transaction_amount').focus();
+};
+
+// Creates updates and loads the Chart to browers
 document.addEventListener("DOMContentLoaded", function () {
 const ctx = document.getElementById('myChart').getContext('2d');
   let myChart = new Chart(ctx, {
@@ -61,3 +67,4 @@ const ctx = document.getElementById('myChart').getContext('2d');
 
   updateChart()
 })
+

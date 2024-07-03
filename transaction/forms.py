@@ -6,7 +6,7 @@ class TransactionForm(forms.ModelForm):
     model = Transaction
     fields = ["transaction_amount", "location", "category"]
     widgets = {
-        "transaction_amount": forms.NumberInput(attrs={"class": "form-control", "placeholder": "Enter amount"}),
-        "category": forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter category"}),
+        "transaction_amount": forms.NumberInput(attrs={"id": "id_transaction_amount","class": "form-control", "placeholder": "Enter amount "}),
+        "category": forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter category" }),
         "location": forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter location", "required":"required"}),
     }

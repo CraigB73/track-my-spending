@@ -33,7 +33,7 @@ create a budget with a monthly allowance and track purchases made and categorize
 
 - Budget model
 - Transaction model
-- *Add data model structure*
+<div align="center"><p>Database Rational Diagram</p><img src="./static/images/database_ERD.jpg" width=300 height=300></div>
 
 
 ## Libraries.

@@ -40,19 +40,21 @@
   {% endblock %}
 </head>
 
-<body class="overflow-visible">
-  <nav class="navbar navbar-expand-lg nav-bg">
+<body class="overflow-visible d-flex-column">
+  <nav class="navbar navbar-expand-lg nav-bg pt-3 sm-mx-1">
     <div class="container-fluid d-flex">
       {% if user.is_authenticated %}
       <a class="navbar-brand py-1 d-flex align-items-center btn-group btn-group {% if request.path == transaction_url %}btn-active{% endif %}"
-         href="{% url 'transaction' %}">
-        <img class="me-2" style="width: 1.5rem;" src="{% static 'svg/wallet.svg' %}" alt="">
+         href="{% url 'transaction' %}" role="button" aria="Link to transactions">
+        <img class="me-2" style="width: 1.5rem;" src="{% static 'svg/wallet.svg' %} "
+             alt="svg of a wallet" aria>
         <span>TMS</span>
       </a>
       {% else %}
       <a class="navbar-brand py-1 d-flex align-items-center btn-group {% if request.path == home_url %}btn-active{% endif %}"
-         href="{% url 'home' %}">
-        <img class="me-2" style="width: 1.25rem;" src="{% static 'svg/home.svg' %}" alt="">
+         href="{% url 'home' %}" role="button" aria="Link to homepage">
+        <img class="me-2" style="width: 1.25rem;" src="{% static 'svg/home.svg' %}"
+             alt="svg of house">
         <span>TMS</span>
       </a>
       {% endif %}
@@ -61,10 +63,10 @@
               aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar"
+      <div class="offcanvas offcanvas-end w-50 bg-secondary" tabindex="-1" id="offcanvasNavbar"
            aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+          <h5 class="offcanvas-title text-body-white" id="offcanvasNavbarLabel">TMS</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                   aria-label="Close"></button>
         </div>
@@ -81,35 +83,35 @@
                  href="{% url 'about' %}">About</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="{% url 'transaction' %}" role="button"
-                 data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="{% url 'transaction' %}"
+                 data-bs-toggle="dropdown" aria-expanded="false" aria="Logout link">
                 Dashboard
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{% url 'budget' %}">Budget</a>
+                <li><a class="dropdown-item" href="{% url 'budget' %}" aria="Budget link">Budget</a>
                 </li>
-                <li><a class="dropdown-item" href="{% url 'transaction' %}">Transaction</a></li>
+                <li><a class="dropdown-item" href="{% url 'transaction' %}"
+                     aria="Transaction link">Transaction</a></li>
               </ul>
             </li>
             <li class="nav-item">
               <a class="nav-link {% if request.path == logout_url %}active{% endif %}"
-                 aria-current="page" href="{% url 'account_logout' %}">Logout</a>
+                 aria-current="page" href="{% url 'account_logout' %}" aria="Logout link">Logout</a>
             </li>
           </ul>
           {% else %}
-          <ul class="navbar-nav justify-content-end flex-grow-1">
+          <ul class="navbar-nav justify-content-end flex-grow-1 sign-in-btn">
             <li
-                class="nav-item btn-group justify-content-center me-lg-2 {% if request.path == login_url %}btn-active{% endif %}">
+                class="nav-item btn-group justify-content-center me-lg-2  {% if request.path == login_url %}btn-active{% endif %}">
               <a id="sign-in-link" class="nav-link " aria-current="page"
                  href="{% url 'account_login' %}?focus=username">Sign In</a>
             </li>
             <li
-                class="nav-item btn-group justify-content-center {% if request.path == signup_url %}btn-active{% endif %}">
+                class="nav-item btn-group justify-content-center reg-btn {% if request.path == signup_url %}btn-active{% endif %}">
               <a class="nav-link " aria-current="page"
                  href="{% url 'account_signup' %}">Register</a>
             </li>
           </ul>
-
           {% endif %}
         </div>
       </div>

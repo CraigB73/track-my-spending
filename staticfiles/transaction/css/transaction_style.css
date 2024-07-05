@@ -1,15 +1,19 @@
+
 h1, h2, p {
   color: rgb(227, 231, 238);
 }
 
+.transaction-container {
+  min-height: calc(100vh - 65px);
+}
 
-
-#section-one {
+.transaction-card {
   border-radius: 25px;
   background:  rgba(110, 127, 128, 0.5);
   box-shadow: 0 4px 6px 0 rgba(227, 231, 238, 0.9), 0 2px 20px 0 rgba(227, 231, 238, 0.8);
 }
 
+/*************  form  *************/
 label {
   padding-top: 8px;
   color: rgb(227, 231, 238);
@@ -19,6 +23,13 @@ input.form-control {
  background: rgba(227, 231, 238, 0.9);
 
 }
+
+/*************  submit button  *************/
 .btn-primary  {
   background: #182138;
+}
+
+/*************  table  *************/
+.table-wrapper {
+  max-height: 275px;
 }

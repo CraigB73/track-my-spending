@@ -7,70 +7,72 @@
 
 {% block content %}
 
-<section id="section-one"
-         class="container d-flex flex-column align-items-center justify-content-center mw-md-100">
-  <h1 class="text-center">Effortless<br>Finance Tracker</h1>
-  <div class="text-center flex-wrap">
-    <p>Track your spending, save more, and reach your financial goals with ease.</p>
-  </div>
-  <div class="gap-2 d-flex flex-md-row flex-column justify-content-center w-50">
-    <div class="col-md-6 col-12 mb-md-0 mb-3">
-      {% if user.is_authenticated %}
-      <a class="btn btn-secondary w-100 fs-sm text-break" aria-current="page"
-         href="{% url 'budget' %}">Create Budget</a>
-      {% else %}
-      <a class="btn btn-secondary w-100 fs-sm text-break" aria-current="page"
-         href="{% url 'account_signup' %}">Get Started</a>
-      {% endif %}
-    </div>
-    <div class="col-md-6 col-12">
-      <a class="btn btn-outline-secondary w-100" aria-current="page" href="{% url 'about' %}">Learn
-        More</a>
-    </div>
-  </div>
-</section>
-<section id="section-two" class="d-flex flex-column align-items-center justify-content-center">
-  <div class="card-section gap-3 d-flex flex-row align-items-center 
-              justify-content-around mx-auto w-75">
-    <div class="img-wrapper ">
-      <img src="{% static 'images/card_image.png' %}" class="img-fluid rounded-start py-5 m-5"
-           alt="">
-    </div>
-    <div class="me-5">
-      <h3 class="mb-3 fs-1">How It Works</h3>
-      <a class="btn btn-secondary" href="{% url 'about' %}">Learn More</a>
-    </div>
-  </div>
-  <div class="container-fluid list-container">
-    <ul class="gap-3 list-group-horizontal d-flex ms-5">
-      <li class="list-group-item col-4 flex-fill border-0 bg-transparent">
-        <img src="{% static 'svg/tracker.svg' %} " alt="">
-        <h5>Track Spending</h5>
-        <p>
-          Monitor your expenses in real-time with our intuitive tools.
-        </p>
-      </li>
-      <li class="list-group-item col-4 flex-fill border-0 bg-transparent">
-        <img class="pb-3" src="{% static 'svg/camera.svg' %}" alt="">
-        <h5>Save Smartly</h5>
-        <p>
-          Get personalized savings tips and incentives.
-        </p>
-      </li>
-      <li class="list-group-item col-4 flex-fill border-0 bg-transparent">
-        <img src="{% static 'svg/circle.svg' %}" alt="">
-        <h5>Budget Efficiently</h5>
-        <p>
-          Create and manage your budget to achieve financial freedom.</p>
-        </p>
-      </li>
-    </ul>
-  </div>
-</section>
-{% block footer %}
-<footer class="bg-white h-5">
 
-</footer>
-{% endblock footer %}
+  <section id="section-one"
+           class="container d-flex flex-column align-items-center justify-content-center mw-md-100">
+    <h1 class="text-center">Effortless<br>Finance Tracker</h1>
+    <div class="text-center flex-wrap">
+      <p>Track your spending, save more, and reach your financial goals with ease.</p>
+    </div>
+    <div class="gap-2 d-flex flex-md-row flex-column justify-content-center w-50">
+      <div class="col-md-6 col-12 mb-md-0 mb-3">
+        {% if user.is_authenticated %}
+        <a class="btn btn-secondary w-100 fs-sm text-break" aria-current="page"
+           href="{% url 'budget' %}">Create Budget</a>
+        {% else %}
+        <a class="btn btn-secondary w-100 fs-sm text-break" aria-current="page"
+           href="{% url 'account_signup' %}">Get Started</a>
+        {% endif %}
+      </div>
+      <div class="col-md-6 col-12">
+        <a class="btn btn-outline-secondary w-100" aria-current="page"
+           href="{% url 'about' %}">Learn
+          More</a>
+      </div>
+    </div>
+  </section>
+  <section id="section-two" class="d-flex flex-column align-items-center justify-content-center">
+    <div
+         class="card-section gap-3 d-flex flex-column  flex-lg-row align-items-center justify-content-around mx-auto w-75">
+      <div class="img-wrapper">
+        <img src="{% static 'images/card_image.png' %}" class="img-fluid rounded-start py-5 m-5"
+             alt="Man sitting in office looking at tablet">
+      </div>
+      <div class="me-5">
+        <h3 class="mb-3 fs-1">How It Works</h3>
+        <a class="btn btn-secondary" href="{% url 'about' %}">Learn More</a>
+      </div>
+    </div>
+    <div class="container-fluid list-container">
+      <ul class="gap-3 list-group-horizontal d-flex ms-5">
+        <li class="list-group-item col-4 flex-fill border-0 bg-transparent">
+          <img src="{% static 'svg/tracker.svg' %} " alt="">
+          <h5>Track Spending</h5>
+          <p>
+            Monitor your expenses in real-time with our intuitive tools.
+          </p>
+        </li>
+        <li class="list-group-item col-4 flex-fill border-0 bg-transparent">
+          <img class="pb-3" src="{% static 'svg/camera.svg' %}" alt="">
+          <h5>Save Smartly</h5>
+          <p>
+            Get personalized savings tips and incentives.
+          </p>
+        </li>
+        <li class="list-group-item col-4 flex-fill border-0 bg-transparent">
+          <img src="{% static 'svg/circle.svg' %}" alt="">
+          <h5>Budget Efficiently</h5>
+          <p>
+            Create and manage your budget to achieve financial freedom.</p>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+  {% block footer %}
+  <footer class="bg-white h-5">
+
+  </footer>
+  {% endblock footer %}
 
 {% endblock %}

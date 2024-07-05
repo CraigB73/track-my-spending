@@ -2,8 +2,8 @@
 {% load allauth i18n %}
 
 {% block content %}
-<div class=" d-flex justify-content-center mt-5">
-    <div class="container signin_card mt-5 sm-w-50 w-50 d-flex flex-column align-items-center p-5 ">
+<div class=" d-flex justify-content-center mx-2 mt-5">
+    <div class="container signin_card mt-5  d-flex flex-column align-items-center p-5 ">
         <div class="text-center">
             {% element h1 %}
             {% trans "Sign Out" %}
@@ -19,15 +19,22 @@
             {% endslot %}
             <div>
                 {% slot actions %}
-                <button class="btn btn-danger" type="submit">{% trans 'Sign Out' %}</button>
-
+                <button class="btn btn-danger" type="submit" id="log-out">{% trans 'Sign
+                    Out'%}</button>
                 {% endslot %}
-
             </div>
             {% endelement %}
         </div>
     </div>
 </div>
+
+<script>
+    const btn = document.getElementById('log-out');
+    btn.addEventListener('click', () => {
+        const msg = "You will be logged out!";
+        alert(msg)       
+    })
+</script>
 
 
 {% endblock content %}

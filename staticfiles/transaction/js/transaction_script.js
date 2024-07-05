@@ -1,9 +1,3 @@
-  document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("spinner").style.display = "block";
-  });
-
-  
-
 // Redirects cusor to the transaction amount input after submit and on pageload
 window.onload = function() {
   document.getElementById('id_transaction_amount').focus();
@@ -11,10 +5,6 @@ window.onload = function() {
 
 // Creates updates and loads the Chart to browers
 document.addEventListener("DOMContentLoaded", function () {
-  // Removes spinner when pages finnishes loading
-  window.addEventListener("load", function () {
-    setTimeout(() => { document.getElementById("spinner").style.display = "none"; }, 2000)
-  });
 const ctx = document.getElementById('myChart').getContext('2d');
   let myChart = new Chart(ctx, {
     type: 'doughnut',
@@ -55,7 +45,6 @@ const ctx = document.getElementById('myChart').getContext('2d');
             color: "#e3e7ee",
             font: {
               size: 12,
-              weigth: "bold"
             }
           }
         }
@@ -78,4 +67,7 @@ const ctx = document.getElementById('myChart').getContext('2d');
 
   updateChart()
 })
+
+// Clears the history form the table without deleting from database
+
 

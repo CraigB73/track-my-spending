@@ -21,9 +21,6 @@ input.form-control {
   background: #182138;
 }
 
-
-#section-two {
-  border-radius: 25px;
-  background:  rgba(110, 127, 128, 0.7);
-  box-shadow: 0 4px 6px 0 rgba(227, 231, 238, 0.5), 0 2px 20px 0 rgba(227, 231, 238, 0.5);
+.table-wrapper {
+  max-height: 275px;
 }

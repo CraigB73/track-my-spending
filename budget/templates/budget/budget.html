@@ -9,7 +9,8 @@
 
 
 {% block content %}
-<section class="container card-body d-flex flex-column budget_card mt-5 p-4 sm-w-100 lg-w-75">
+<div class="budget-container mx-3 mt-5 flex-xs-column flex-sm-column ">
+<div class="d-flex flex-column budget_card mt-5 p-3 container d-lg-flex flex-lg-column">
   <h1 class="display-4 text-center mb-4">Create Your Budget</h1>
   <form class="needs-validation d-grid " method="post" action="">
     {% csrf_token %}
@@ -26,7 +27,7 @@
         <div>
           <label class="form-label" for="expense">Expenses:</label>
         </div>
-        <div >
+        <div>
           {{ form.expense }}
         </div>
       </div>
@@ -35,7 +36,7 @@
           <label class="form-label" for="allowance">Mothly
             Allowance:</label>
         </div>
-        <div >
+        <div>
           {{ form.allowance }}
         </div>
         <div class="invalid-feedback">Please enter your allowance.</div>
@@ -77,57 +78,60 @@
         </div>
         {% endfor %}
         {% endif %}
-        <button type="submit" class="btn btn-primary mt-4 btn-lg w-50"><a
-             href="{% url 'budget' %}">Create Budget</a></button>
+        <button type="submit" class="btn btn-primary col-12 px-3 col-md-4">Create Budget</button>
       </div>
   </form>
-</section>
-<section class="container card mt-5 px-5 py-4 mw-50 table-responsive " id="section-two">
-  <h2>Bookkeeping Journal</h2>
-  <table class="table table-hover ">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Income</th>
-        <th>Expenses</th>
-        <th>Savings</th>
-        <th>Allowance</th>
-        {% for budget in budgets %}
-        {% if budget.goal_saving %}
-        <th>Saving for:<br> <span>{{ budget.goal_saving_item}}</span> </th>
-        {% else %}
-        <th></th>
-        {% endif %}
-        {% endfor %}
-        <th>Delete/Update</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for budget in budgets %}
-      <tr>
-        <td>{{ budget.created_on|date:"M d, Y" }}</td>
-        <td>{{ budget.income }}</td>
-        <td>{{ budget.expense }}</td>
-        <td>{{ budget.monthly_saving }}</td>
-        <td>{{ budget.allowance }}</td>
-        {% if budget.goal_saving %}
-        <td>{{ budget.goal_saving}}</td>
-        {% else %}
-        <td></td>
-        {% endif %}
-        <td class="d-flex gap-2">
-          <form action="{% url 'delete_budget' budget.id %}" method="post">
-            {% csrf_token %}
-            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-          </form>
-          <form action="{% url 'update_budget' budget.id %}" method="post">
-            {% csrf_token %}
-            <button class="btn btn-primary btn-sm " type="submit">Update</button>
-          </form>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</section>
+</div>
+<div class="container mb-4">
+  <div class="col-12 table-responsive card-body">
+    <h2>Bookkeeping Journal</h2>
+    <div class="overflow-y-auto table-wrapper">
+      <table class="table table-hover table-bordered">
+        <thead class="table-secondary">
+          <tr>
+            <th>Date</th>
+            <th>Income</th>
+            <th>Expenses</th>
+            <th>Savings</th>
+            <th>Allowance</th>
+            {% for budget in budgets %}
+            {% if budget.goal_saving %}
+            <th>Saving for:<br> <span>{{ budget.goal_saving_item}}</span> </th>
+            {% else %}
+            <th></th>
+            {% endif %}
+            {% endfor %}
+            <th>Delete/Update</th>
+          </tr>
+        </thead>
+        <tbody class="table-striped">
+          {% for budget in budgets %}
+          <tr>
+            <td>{{ budget.created_on|date:"M d, Y" }}</td>
+            <td>{{ budget.income }}</td>
+            <td>{{ budget.expense }}</td>
+            <td>{{ budget.monthly_saving }}</td>
+            <td>{{ budget.allowance }}</td>
+            {% if budget.goal_saving %}
+            <td>{{ budget.goal_saving}}</td>
+            {% else %}
+            <td></td>
+            {% endif %}
+            <td class="d-flex gap-2">
+              <form action="{% url 'delete_budget' budget.id %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+              </form>
+              <form action="{% url 'update_budget' budget.id %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-primary btn-sm " type="submit">Update</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 {% endblock %}

@@ -10,128 +10,128 @@
 
 {% block content %}
 <div class="budget-container mx-3 mt-5 flex-xs-column flex-sm-column ">
-<div class="d-flex flex-column budget_card mt-5 p-3 container d-lg-flex flex-lg-column">
-  <h1 class="display-4 text-center mb-4">Create Your Budget</h1>
-  <form class="needs-validation d-grid " method="post" action="">
-    {% csrf_token %}
-    <div class="row">
-      <div class="col-md-4">
-        <div>
-          <label class="form-label" for="income">Income:</label>
+  <div class="d-flex flex-column budget_card mt-5 p-3 container d-lg-flex flex-lg-column">
+    <h1 class="display-4 text-center mb-4">Create Your Budget</h1>
+    <form class="needs-validation d-grid " method="post" action="">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-4">
+          <div>
+            <label class="form-label" for="income">Income:</label>
+          </div>
+          <div>
+            {{ form.income }}
+          </div>
         </div>
-        <div>
-          {{ form.income }}
+        <div class="col-md-4">
+          <div>
+            <label class="form-label" for="expense">Expenses:</label>
+          </div>
+          <div>
+            {{ form.expense }}
+          </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div>
-          <label class="form-label" for="expense">Expenses:</label>
-        </div>
-        <div>
-          {{ form.expense }}
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div>
-          <label class="form-label" for="allowance">Mothly
-            Allowance:</label>
-        </div>
-        <div>
-          {{ form.allowance }}
-        </div>
-        <div class="invalid-feedback">Please enter your allowance.</div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <div>
-          <label class="form-label" for="monthly_saving">Monthly
-            Savings:</label>
-        </div>
-        <div>
-          {{ form.monthly_saving }}
+        <div class="col-md-4">
+          <div>
+            <label class="form-label" for="allowance">Mothly
+              Allowance:</label>
+          </div>
+          <div>
+            {{ form.allowance }}
+          </div>
+          <div class="invalid-feedback">Please enter your allowance.</div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div>
-          <label class="form-label" for="goal_saving">Savings
-            Goal:</label>
+      <div class="row">
+        <div class="col-md-4">
+          <div>
+            <label class="form-label" for="monthly_saving">Monthly
+              Savings:</label>
+          </div>
+          <div>
+            {{ form.monthly_saving }}
+          </div>
         </div>
-        <div>
-          {{ form.goal_saving }}
+        <div class="col-md-4">
+          <div>
+            <label class="form-label" for="goal_saving">Savings
+              Goal:</label>
+          </div>
+          <div>
+            {{ form.goal_saving }}
+          </div>
         </div>
-      </div>
-      <div class="col">
-        <div>
-          <label class="form-label" for="goal_saving_item">Saving
-            For:</label>
+        <div class="col">
+          <div>
+            <label class="form-label" for="goal_saving_item">Saving
+              For:</label>
+          </div>
+          <div>
+            {{ form.goal_saving_item }}
+          </div>
         </div>
-        <div>
-          {{ form.goal_saving_item }}
-        </div>
-      </div>
-      <div class="text-center pt-3">
-        {% if messages %}
-        {% for message in messages %}
-        <div class="text-warning alert alert-{{ message.tags }} mb-0">
-          {{ message }}
-        </div>
-        {% endfor %}
-        {% endif %}
-        <button type="submit" class="btn btn-primary col-12 px-3 col-md-4">Create Budget</button>
-      </div>
-  </form>
-</div>
-<div class="container mb-4">
-  <div class="col-12 table-responsive card-body">
-    <h2>Bookkeeping Journal</h2>
-    <div class="overflow-y-auto table-wrapper">
-      <table class="table table-hover table-bordered">
-        <thead class="table-secondary">
-          <tr>
-            <th>Date</th>
-            <th>Income</th>
-            <th>Expenses</th>
-            <th>Savings</th>
-            <th>Allowance</th>
-            {% for budget in budgets %}
-            {% if budget.goal_saving %}
-            <th>Saving for:<br> <span>{{ budget.goal_saving_item}}</span> </th>
-            {% else %}
-            <th></th>
-            {% endif %}
-            {% endfor %}
-            <th>Delete/Update</th>
-          </tr>
-        </thead>
-        <tbody class="table-striped">
-          {% for budget in budgets %}
-          <tr>
-            <td>{{ budget.created_on|date:"M d, Y" }}</td>
-            <td>{{ budget.income }}</td>
-            <td>{{ budget.expense }}</td>
-            <td>{{ budget.monthly_saving }}</td>
-            <td>{{ budget.allowance }}</td>
-            {% if budget.goal_saving %}
-            <td>{{ budget.goal_saving}}</td>
-            {% else %}
-            <td></td>
-            {% endif %}
-            <td class="d-flex gap-2">
-              <form action="{% url 'delete_budget' budget.id %}" method="post">
-                {% csrf_token %}
-                <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-              </form>
-              <form action="{% url 'update_budget' budget.id %}" method="post">
-                {% csrf_token %}
-                <button class="btn btn-primary btn-sm " type="submit">Update</button>
-              </form>
-            </td>
-          </tr>
+        <div class="text-center pt-3">
+          {% if messages %}
+          {% for message in messages %}
+          <div class="text-warning alert alert-{{ message.tags }} mb-0">
+            {{ message }}
+          </div>
           {% endfor %}
-        </tbody>
-      </table>
+          {% endif %}
+          <button type="submit" class="btn btn-primary col-12 px-3 col-md-4">Create Budget</button>
+        </div>
+    </form>
+  </div>
+  <div class="container mb-4">
+    <div class="col-12 table-responsive card-body">
+      <h2>Bookkeeping Journal</h2>
+      <div class="overflow-y-auto table-wrapper">
+        <table class="table table-hover table-bordered">
+          <thead class="table-secondary">
+            <tr class="text-center">
+              <th>Date</th>
+              <th>Income</th>
+              <th>Expenses</th>
+              <th>Savings</th>
+              <th>Allowance</th>
+              {% for budget in budgets %}
+              {% if budget.goal_saving %}
+              <th>Saving for:<br> <span>{{ budget.goal_saving_item}}</span> </th>
+              {% else %}
+              <th class="d-none"></th>
+              {% endif %}
+              {% endfor %}
+              <th>Delete/Update</th>
+            </tr>
+          </thead>
+          <tbody class="table-striped text-center">
+            {% for budget in budgets %}
+            <tr>
+              <td>{{ budget.created_on|date:"M d, Y" }}</td>
+              <td>{{ budget.income }}</td>
+              <td>{{ budget.expense }}</td>
+              <td>{{ budget.monthly_saving }}</td>
+              <td>{{ budget.allowance }}</td>
+              {% if budget.goal_saving %}
+              <td>{{ budget.goal_saving}}</td>
+              {% else %}
+              <td class="d-none"></td>
+              {% endif %}
+              <td class="d-flex gap-2 justify-content-center">
+                <form action="{% url 'delete_budget' budget.id %}" method="post">
+                  {% csrf_token %}
+                  <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                </form>
+                <form action="{% url 'update_budget' budget.id %}" method="post">
+                  {% csrf_token %}
+                  <button class="btn btn-primary btn-sm " type="submit">Update</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</div>
-{% endblock %}
+  {% endblock %}

@@ -1,13 +1,13 @@
-from django.http import JsonResponse, HttpResponseBadRequest
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from .models import Transaction, Budget
 from .forms import TransactionForm
 from django.views.decorators.http import require_GET
-from django.db.models import Sum
+from django.db.models import Sum #Used in get_transaction_data
 
-# Create your views here.
+
 @login_required
 def transaction_view(request): 
     #Queries the budget model to use allowance created within the budget  
@@ -15,8 +15,8 @@ def transaction_view(request):
         budget = Budget.objects.get(user=request.user)
     except Budget.DoesNotExist:
         return render(request, 'transaction/transaction.html')
+    
     allowance = budget.allowance
-
     budget.save()
 
     if request.method == 'POST':
@@ -32,7 +32,6 @@ def transaction_view(request):
     
     transactions = Transaction.objects.filter(user = request.user).order_by("-created_on")
     total_transactions = sum(transaction.transaction_amount for transaction in transactions )
-    
     
     global allowance_remaining #Enable to use varible in delete_transaction to add back transaction
     allowance_remaining = allowance - total_transactions
@@ -60,8 +59,10 @@ def transaction_view(request):
             "saved": True
             })
 """
-Upond deletion transaction will be removed from table row and update 
-the allowance by returning the transaction amount back to remaining_allowance"""
+Defers the response back to the client by using revers_lazy redirectiing user back to
+the transaction URL after deleting transaction and updating the allowance by addinb back
+the amount deleted.
+"""
 def delete_transaction(request, pk):
     transaction = get_object_or_404(Transaction, pk=pk, user=request.user)
     budget = Budget.objects.get(user=request.user)
@@ -69,7 +70,7 @@ def delete_transaction(request, pk):
         transaction.transaction_amount += allowance_remaining
     budget.save()
     transaction.delete()
-    return redirect(reverse_lazy("transaction"))
+    return redirect(reverse_lazy("transaction")) #Suggested by ChatGBT
 
 
 """

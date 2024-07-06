@@ -8,11 +8,14 @@ from django.views.generic import View, UpdateView, DeleteView
 from.forms import BudgetForm
 from.models import Budget
 
+"""
+This view was refactor to a class view with help of ChatGBT for better understanding.
+"""
 class BudgetView(View):
     template_name = "budget/budget.html"
     form_class = BudgetForm
     """
-    Gets the budget model obj. If budget obj exist.
+    Access the budget model obj. If budget obj exist.
     Check the current month/year to ensure user only creates one budget the existing month.
     Retrieved save budget data to be displayed in budget tempalates
     """
@@ -77,11 +80,14 @@ class BudgetView(View):
     def calculate_totals(self, field, budgets):
         return sum(getattr(budget, field) if getattr(budget, field) is not None else 0 for budget in budgets)
 
-
+"""
+Deferse the repsonse to the client and redirect the user back to the budget
+URL after deletion 
+"""
 class DeleteBudgetView(DeleteView):
     model = Budget
     success_url = reverse_lazy("budget")
-
+    #Ensures that budget belongs to that specific user
     def get_object(self, queryset=None):
         obj = super().get_object(queryset=queryset)
         if not obj.user == self.request.user:

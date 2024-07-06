@@ -10,6 +10,7 @@ h1, h2, h3, h5, p {
   color: #F9FAFB;
 
 }
+
 h1 {
   font-size: 4rem;
 
@@ -27,24 +28,3 @@ h3 {
 }
 
 
-/****************** Card-img w/ text button ******************/
-.img-wrapper {
-  width: 50%;
-}
-
-.img-wrapper img{
-  width: 100%;
-}
-
-
-/****************** Unorder List  ******************/
-.list-container {
-  width: 90vw;
-}
-ul .list-group {
-  
-}
-
-ul.px {
-  padding: 0 100px;
-}

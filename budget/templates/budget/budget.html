@@ -75,6 +75,10 @@
           {% for message in messages %}
           <div class="text-warning alert alert-{{ message.tags }} mb-0">
             {{ message }}
+            <button type="button" id="clear-messages" class="close btn btn-success"
+                    data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">Ok</span>
+            </button>
           </div>
           {% endfor %}
           {% endif %}
@@ -135,3 +139,15 @@
     </div>
   </div>
   {% endblock %}
+
+  {% block script %}
+  <!-- Clears the warning message: only one function so I decided to keep in the html -->
+  <script>
+    document.getElementById('clear-messages').addEventListener('click', function () {
+      var messages = document.querySelectorAll('.alert');
+      messages.forEach(function (message) {
+        message.remove();
+      });
+    });
+  </script>
+  {% endblock script %}

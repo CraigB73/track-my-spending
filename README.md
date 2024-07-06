@@ -39,10 +39,10 @@ create a budget with a monthly allowance and track purchases made and categorize
 ## Libraries.
  *add Dj libraries/imports chartjs used in project*
 ## Testing
-Testing of Mastermind was done manually by:
+Testing of Track My Spending was done manually by:
 - Ran code through a [PEP8](https://pep8ci.herokuapp.com/) linter with no major issues.  
-- Performed multiple run ups of the game entering various correct and incorrect inputs to check input validators.   
-- Played the game multiple times to ensure that the attemp count updated correctly. 
+-   
+- 
 
 ## Bugs
 
@@ -56,7 +56,6 @@ Deployment was performed using Code Institute's mock terminal for [HEROKU](herok
      - Config(Key: Port, Value: 8000)
      - Buildbacks to <mark>Python</mark> and <mark>NodeJS</mark> in order
   3. Link the Heroku app to [GitHub repository](https://github.com/CraigB73/track-my-spending.git)
-  4. Click: <b>Deploy</B>
 
 Track My Money: [TMS](https://track-my-spending-2651d262fa88.herokuapp.com/)
 

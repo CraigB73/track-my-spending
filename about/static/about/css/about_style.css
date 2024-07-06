@@ -4,6 +4,24 @@
   box-shadow: 0 4px 6px 0 rgba(227, 231, 238, 0.7), 0 2px 20px 0 rgba(227, 231, 238, 0.7);
 }
 
+li.li-buttet::before {
+  color: #36454f
+}
+
 h1 {
   font-size: 4rem;
+  
+}
+
+h2 {
+  font-size: 2rem;
+  color: #36454f;
+  font-weight:bold;
+}
+
+img.labels-img {
+ width: 150px;
+ height: 100px;
+ padding: 30px:
+ padding-left: 10px;
 }

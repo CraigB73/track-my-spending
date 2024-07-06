@@ -31,9 +31,9 @@
   </div>
 </div>
 <!-- Card Section -->
-<div id="section-two" class="container-fluid">
+<div id="section-two" class="container-fluid pb-3">
   <div class="card bg-transparent border-0 ">
-    <div class="row d-flex align-items-center justify-content-center m-3">
+    <div class="row d-flex align-items-center justify-content-center m-3 mt-5">
       <div class="col-sm-7 ">
         <img src="{% static 'images/card_image.png' %}" class="img-fluid rounded-start"
              alt="Man sitting in office looking at tablet">
@@ -46,45 +46,53 @@
       </div>
     </div>
   </div>
-  <!-- List/ SVGS-->
 
-  <div class="card-group container-fluid d-flex flex-wrap mx-lg-5">
-    <div class="card bg-transparent border-0 container col-4">
-      <div class="collapse-sm" data-bs-toggle="collapse" data-bs-target="#tracker-info">
-        <img class="card-img-top w-25" src="{% static 'svg/tracker.svg' %}" alt="" />
-      </div>
-      <div class="collapse" id="tracker-info">
-        <h5>Track Spending</h5>
-        <p class="w-75">
-          Monitor your expenses in real-time with our intuitive tools.
-        </p>
-      </div>
+  <!-- Hoverable Image/Icon Section-->
+  <div class="d-flex justify-content-around pt-3 pb-1">
+    <div class="tooltip-container">
+      <button class="btn btn-icon-link-hover" type="button" data-toggle="tooltip">
+        <img class="w-sm-50" src="{% static 'svg/tracker.svg' %}" alt="" />
+        <div class="icon-info">
+          <div class="card card-body bg-transparent border-0">
+            <h5>Track Spending</h5>
+            <p>
+              Monitor your expenses in real-time with our intuitive tools.
+            </p>
+          </div>
+        </div>
+      </button>
+    </div>
+    <div class="tooltip-container">
+      <button class="btn btn-icon-link-hover" type="button" data-toggle="tooltip">
+        <img class="w-sm-50" src="{% static 'svg/camera.svg' %}" alt="" />
+        <div class="icon-info">
+          <div class="card card-body bg-transparent border-0">
+            <h5>Save Smartly</h5>
+            <p>
+              Get personalized savings tips and incentives.
+            </p>
+          </div>
+        </div>
+      </button>
+    </div>
+    <div class="tooltip-container">
+      <button class="btn btn-icon-link-hover" type="button" data-toggle="tooltip">
+        <img class="w-sm-50" src="{% static 'svg/circle.svg' %}" alt="" />
+        <div class="icon-info">
+          <div class="card card-body bg-transparent border-0">
+            <h5>Budget Efficiently</h5>
+            <p class="d-sm-none d-md-block">
+              Create and manage your budget to achieve financial freedom.
+            </p>
+          </div>
+        </div>
+      </button>
     </div>
 
-    <div class="card bg-transparent border-0 container-fluid col-4">
-      <div class="collapse-sm" data-bs-toggle="collapse" data-bs-target="#save">
-        <img class="card-img-top w-25 pt-sm-0 pt-lg-2 " src="{% static 'svg/camera.svg' %}" alt="">
-      </div>
-      <div class=" collapse mt-lg-3 mt-sm-1" id="save">
-        <h5>Save Smartly</h5>
-        <p class="d-none d-md-block w-75 ">
-          Get personalized savings tips and incentives.
-        </p>
-      </div>
-    </div>
-    <div class="card bg-transparent border-0 container-fluid col-4">
-      <div class="collapse-sm" data-bs-toggle="collapse" data-bs-target="#budget">
-        <img class="card-img-top w-25" src="{% static 'svg/circle.svg' %}" alt="">
-      </div>
-      <div class="collapse" id="budget">
-        <h5>Budget Efficiently</h5>
-        <p class="d-none d-md-block w-75">
-          Create and manage your budget to achieve financial freedom.</p>
-        </p>
-      </div>
-    </div>
   </div>
+  <p class="text-center">Hover me!</p>
 </div>
+
 
 {% block footer %}
 <footer class="bg-black" style="height: 50px;">

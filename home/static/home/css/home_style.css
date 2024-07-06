@@ -27,4 +27,12 @@ h3 {
   height: 100%;
 }
 
+/****************** Hoverable Icon Images ******************/
 
+.tooltip-container .icon-info {
+  display: none;
+}
+
+.tooltip-container:hover .icon-info {
+  display: block;
+}

@@ -22,7 +22,7 @@ Login: [TMS](https://track-my-spending-2651d262fa88.herokuapp.com/)
 
 
 ## Features
-features in the project as well up coming features
+Features in the project as well up coming features
 
 
 Login: [TMS](https://track-my-spending-2651d262fa88.herokuapp.com/)

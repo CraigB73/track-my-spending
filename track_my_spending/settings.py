@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ["127.0.0.1",
@@ -112,7 +112,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Allauth to register new user without email not using email service
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_FORMS = {
+    'signup': 'allauth.account.forms.SignupForm',
+}
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'

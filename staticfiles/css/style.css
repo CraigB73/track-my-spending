@@ -1,13 +1,12 @@
 body {
     background-color: #36454F
-
 }
-/* ************ navbar ************ */
 
+/* ************ navbar ************ */
 .nav-bg {
   background-color: #36454F
-
 }
+
 .navbar-brand {
   padding: 2px;
   font-size: .75rem;
@@ -19,16 +18,13 @@ body {
 
 .signin-btn {
   margin-right: 0px;
-  
 }
 
 .btn-group {
   background: #0F172A;
   padding: 0 20px;
   color: #F9FAFB;
-  
 }
-
 
 .btn-active {
   border: 1px solid #F9FAFB;
@@ -55,10 +51,6 @@ body {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28249, 250, 251%29'  stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
-
-.sign-in-btn {
-
-}
 .signin_card {
   color: white;
   border-radius: 25px;
@@ -66,14 +58,32 @@ body {
   box-shadow: 0 4px 6px 0 rgba(227, 231, 238, 0.9), 0 2px 20px 0 rgba(227, 231, 238, 0.8);
 }
 
+/* ************ Page Loader ************ */
+.spinner-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  }
 
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* ************ Media query for registration button ************ */
 @media (max-width: 991px) {
   li.reg-btn {
-  margin-top: 10px;
-}
+    margin-top: 10px;
+  }
 
-div.offcanvas-end {
-  width:200px;
-}
-
+  div.offcanvas-end {
+    width:200px;
+  }
 }

@@ -49,10 +49,10 @@
 </head>
 
 <body class="overflow-visible d-flex-column">
-  <nav class="navbar navbar-expand-lg nav-bg pt-4 px-2 sm-mx-1">
+  <nav class="navbar navbar-expand-lg nav-bg pt-4 px-2 sm-mx-1" aria-label="Main Navigation">
     <div class="container-fluid d-flex px-5">
       <a class="navbar-brand py-1 d-flex align-items-center btn-group {% if request.path == home_url %}btn-active{% endif %}"
-         href="{% url 'home' %}" role="button" aria="Link to homepage">
+         href="{% url 'home' %}" role="button" aria-label="Link to homepage">
         <img class="me-2" style="width: 1.25rem;" src="{% static 'svg/home.svg' %}"
              alt="svg of house">
         <span>TMS</span>
@@ -71,31 +71,32 @@
         </div>
         <div class="offcanvas-body">
           {% if user.is_authenticated %}
-
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
               <a class="nav-link {% if request.path == home_url %}active{% endif %}"
-                 href="{% url 'home' %}">Home</a>
+                 href="{% url 'home' %}" aria-current="page" aria-label="Home page">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link {% if request.path == about_url %}active{% endif %}"
-                 href="{% url 'about' %}">About</a>
+                 href="{% url 'about' %}" aria-label="About page">About</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="{% url 'transaction' %}"
-                 data-bs-toggle="dropdown" aria-expanded="false" aria="Logout link">
+                 data-bs-toggle="dropdown" aria-expanded="false" aria-label="Dashboard dropdown">
                 Dashboard
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{% url 'budget' %}" aria="Budget link">Budget</a>
+                <li><a class="dropdown-item" href="{% url 'budget' %}"
+                     aria-label="Budget page">Budget</a>
                 </li>
                 <li><a class="dropdown-item" href="{% url 'transaction' %}"
-                     aria="Transaction link">Transaction</a></li>
+                     aria-label="Transaction page">Transaction</a></li>
               </ul>
             </li>
             <li class="nav-item">
               <a class="nav-link {% if request.path == logout_url %}active{% endif %}"
-                 aria-current="page" href="{% url 'account_logout' %}" aria="Logout link">Logout</a>
+                 aria-current="page" href="{% url 'account_logout' %}"
+                 aria-label="Logout link">Logout</a>
             </li>
           </ul>
           {% else %}
@@ -103,12 +104,13 @@
             <li
                 class="nav-item btn-group justify-content-center me-lg-2  {% if request.path == login_url %}btn-active{% endif %}">
               <a id="sign-in-link" class="nav-link " aria-current="page"
-                 href="{% url 'account_login' %}?focus=username">Sign In</a>
+                 href="{% url 'account_login' %}?focus=username" aria-label="Sign in link">Sign
+                In</a>
             </li>
             <li
                 class="nav-item btn-group justify-content-center reg-btn {% if request.path == signup_url %}btn-active{% endif %}">
-              <a class="nav-link " aria-current="page"
-                 href="{% url 'account_signup' %}">Register</a>
+              <a class="nav-link " aria-current="page" href="{% url 'account_signup' %}"
+                 aria-label="Register link">Register</a>
             </li>
           </ul>
           {% endif %}

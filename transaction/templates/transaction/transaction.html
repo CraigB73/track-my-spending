@@ -6,148 +6,112 @@
 {% endblock %}
 
 {% block content %}
-<div class="transaction-container m-2 flex-xs-column flex-sm-column ">
-  <div class="transaction-card mt-5 p-md-3 container d-lg-flex flex-lg-column">
-    <div class="text-center ">
-      <h1>Transactions</h1>
-      <p>Remaining Allowance: ${{ remaining_allowance }}</p>
-    </div>
-    <div class="row justify-content-between px-sm-3 gap-md-2 gap-2">
-      <!-- Form -->
-      <div class="col-lg-6 h-100">
-        <form method="post" class="container-fluid needs-validation h-100">
-          {% csrf_token %}
-          <div class="mb-3 ">
-            <label for="transaction_amount" class="form-label">Transaction amount:</label>
-            {{ form.transaction_amount }}
-            <div class="invalid-feedback">Please enter a transaction amount.</div>
-          </div>
-          <div class="mb-3">
-            <label for="category" class="form-label">Category:</label>
-            {{ form.category }}
-            <div class="invalid-feedback">Please enter a category.</div>
-          </div>
-          <div class="mb-3">
-            <label for="location" class="form-label">Location:</label>
-            {{ form.location }}
-            <div class="invalid-feedback">Please enter a location.</div>
-          </div>
-          <div class="mb-3">
-            <button type="submit" class="btn btn-primary w-100">Log Transaction</button>
-          </div>
-        </form>
+<div class="transaction-container m-2 flex-xs-column flex-sm-column"
+     aria-label="Transaction container">
+  {% if not budget_created %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    You need to create a budget to log transactions. <a href="{% url 'budget' %}">Create
+      Budget</a>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endif %}
+  <div class="transaction-container m-2 flex-xs-column flex-sm-column"
+       aria-label="Transaction container">
+    <div class="transaction-card mt-5 p-md-3 container d-lg-flex flex-lg-column"
+         aria-label="Transaction card">
+      <div class="text-center" aria-label="Transaction header">
+        <h1>Transactions</h1>
+        <p aria-label="Remaining allowance">Remaining Allowance: ${{ remaining_allowance }}</p>
       </div>
-      <!-- Chart -->
-      <div class="col-lg-4">
-        {% if not list_transactions %}
-        <div class=" text-center">
-          <p>You have no transactions.</p>
-          <img class="w-75" src="{% static 'transaction/images/chart.png' %}" alt="">
-        </div>
-        {% else %}
-        <div class="text-center h-100 h-lg-75">
-          <canvas class="h-100 h-lg-75" id="myChart"></canvas>
-        </div>
-        {% endif %}
-      </div>
-    </div>
-    <!-- Transaction History Table -->
-    <div class="container mb-4">
       <div class="row justify-content-between px-sm-3 gap-md-2 gap-2">
-        <div class="col-12 table-responsive card-body">
+        <!-- Form -->
+        <div class="col-lg-6 h-100" aria-label="Transaction form">
+          <form method="post" class="container-fluid needs-validation h-100"
+                aria-label="Log transaction form">
+            {% csrf_token %}
+            <div class="mb-3" aria-label="Transaction amount field">
+              <label for="transaction_amount" class="form-label">Transaction amount:</label>
+              {{ form.transaction_amount }}
+              <div class="invalid-feedback" aria-live="polite">Please enter a transaction amount.
+              </div>
+            </div>
+            <div class="mb-3" aria-label="Category field">
+              <label for="category" class="form-label">Category:</label>
+              {{ form.category }}
+              <div class="invalid-feedback" aria-live="polite">Please enter a category.</div>
+            </div>
+            <div class="mb-3" aria-label="Location field">
+              <label for="location" class="form-label">Location:</label>
+              {{ form.location }}
+              <div class="invalid-feedback" aria-live="polite">Please enter a location.</div>
+            </div>
+            <div class="mb-3">
+              <button type="submit" class="btn btn-primary w-100"
+                      aria-label="Log transaction button">Log Transaction</button>
+            </div>
+          </form>
+        </div>
+        <!-- Chart -->
+        <div class="col-lg-4" aria-label="Chart container">
+          {% if not list_transactions %}
+          <div class="text-center" aria-label="No transactions message">
+            <p>You have no transactions.</p>
+            <img class="w-75" src="{% static 'transaction/images/chart.png' %}"
+                 alt="No transactions chart" aria-label="No transactions chart">
+          </div>
+          {% else %}
+          <div class="text-center h-100 h-lg-75" aria-label="Chart">
+            <canvas class="h-100 h-lg-75" id="myChart" aria-label="Transaction chart"></canvas>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <!-- Transaction History Table -->
+      <div class="container mb-4" aria-label="Transaction history table">
+        <div class="row justify-content-between px-sm-3 gap-md-2 gap-2">
+          <div class="col-12 table-responsive card-body"
+               aria-label="Transaction history table wrapper">
             <h2>Transaction History</h2>
-          <div class="overflow-y-auto table-wrapper">
-            <table class="table table-hover table-bordered">
-              <thead class="table-secondary">
-                <tr>
-                  <th>Date</th>
-                  <th>Amount</th>
-                  <th>Location</th>
-                  <th>Category</th>
-                  <th>Delete</th>
-                </tr>
-              </thead>
-              <tbody class="table-striped">
-                {% for transaction in list_transactions %}
-                <tr >
-                  <td>{{ transaction.transaction.created_on|date:"M d" }}</td>
-                  <td>${{ transaction.amount }}</td>
-                  <td>{{ transaction.location }}</td>
-                  <td>{{ transaction.category }}</td>
-                  <td>
-                    <form method="post"
-                          action="{% url 'delete_transaction' transaction.transaction.pk %}">
-                      {% csrf_token %}
-                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+            <div class="overflow-y-auto table-wrapper" aria-label="Transaction history table">
+              <table class="table table-hover table-bordered"
+                     aria-label="Transaction history table">
+                <thead class="table-secondary" aria-label="Transaction history table header">
+                  <tr>
+                    <th aria-label="Date column">Date</th>
+                    <th aria-label="Amount column">Amount</th>
+                    <th aria-label="Location column">Location</th>
+                    <th aria-label="Category column">Category</th>
+                    <th aria-label="Delete column">Delete</th>
+                  </tr>
+                </thead>
+                <tbody class="table-striped" aria-label="Transaction history table body">
+                  {% for transaction in list_transactions %}
+                  <tr aria-label="Transaction {{ transaction.transaction.pk }}">
+                    <td aria-label="Date">{{ transaction.transaction.created_on|date:"M d" }}</td>
+                    <td aria-label="Amount">${{ transaction.amount }}</td>
+                    <td aria-label="Location">{{ transaction.location }}</td>
+                    <td aria-label="Category">{{ transaction.category }}</td>
+                    <td aria-label="Delete">
+                      <form method="post"
+                            action="{% url 'delete_transaction' transaction.transaction.pk %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm"
+                                aria-label="Delete transaction button">Delete</button>
+                      </form>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-{% endblock %}
-<!-- wraps the Chart 
-        <div class="col-12 col-md-4 bg-transparent">
-          {% if not list_transactions %}
-          <div class="text-center">
-            <p>You have no transactions.</p>
-            <img class="w-75" src="{% static 'transaction/images/chart.png' %}" alt="">
-          </div>
-          {% else %}
-          <div>
-            <canvas class="" id="myChart"></canvas>
-          </div>
-          {% endif %}
-        </div>-->
+  {% endblock %}
 
-<!--Wraps Table
-  <div table-responsive-md card-body">
-    <h2>Transaction History</h2>
-    <table class="table table-hover">
-      <thead class="table-secondary">
-        <tr>
-          <th>Date</th>
-          <th>Amount</th>
-          <th>Location</th>
-          <th>Category</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody class="table-striped">
-        {% for transaction in list_transactions %}
-        <tr>
-          <td>{{ transaction.transaction.created_on|date:"M d" }}</td>
-          <td>${{ transaction.amount }}</td>
-          <td>{{ transaction.location }}</td>
-          <td>{{ transaction.category }}</td>
-          <td>
-            <form method="post" action="{% url 'delete_transaction' transaction.transaction.pk %}">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-            </form>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>-->
-
-
-
-{% block script %}
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script defer src="{% static 'transaction/js/transaction_script.js' %}"></script>
-{% endblock %}
-
-<!-- Spinner -->
-<!-- <div class="" id="spinner">
-          <div class="spinner-border text-primary " role="status" id="spinner">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div> -->
+  {% block script %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="{% static 'transaction/js/transaction_script.js' %}"></script>
+  {% endblock %}

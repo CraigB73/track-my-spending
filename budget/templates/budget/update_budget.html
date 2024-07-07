@@ -9,73 +9,76 @@
 
 {% block content %}
 <section class="container card-body d-flex flex-column budget_card mt-5 p-4 sm-w-100 lg-w-75">
-  <h1 class="display-4 text-center mb-4">Update Your Budget</h1>
-  <form class="needs-validation d-grid " method="post" action="">
+  <h1 class="display-4 text-center mb-4" aria-level="1">Update Your Budget</h1>
+  <form class="needs-validation d-grid " method="post">
     {% csrf_token %}
     <div class="row">
       <div class="col-md-4">
         <div>
-          <label class="form-label" for="income">Income:</label>
+          <label class="form-label" for="income" aria-label="Income input field">Income:</label>
         </div>
         <div>
           {{ form.income }}
-          <p>Current income: {{ object.income }}</p>
+          <p aria-label="Current income value">Current income: {{ object.income }}</p>
         </div>
       </div>
       <div class="col-md-4">
         <div>
-          <label class="form-label" for="expense">Expenses:</label>
+          <label class="form-label" for="expense"
+                 aria-label="Expenses input field">Expenses:</label>
         </div>
         <div>
           {{ form.expense }}
-          <p>Current expense: {{ object.expense }}</p>
+          <p aria-label="Current expense value">Current expense: {{ object.expense }}</p>
         </div>
       </div>
       <div class="col-md-4">
         <div>
-          <label class="form-label" for="allowance">Mothly
-            Allowance:</label>
+          <label class="form-label" for="allowance"
+                 aria-label="Monthly allowance input field">Mothly Allowance:</label>
         </div>
         <div>
           {{ form.allowance }}
-          <p>Current allowance: {{ object.allowance }}</p>
+          <p aria-label="Current allowance value">Current allowance: {{ object.allowance }}</p>
         </div>
-        <div class="invalid-feedback">Please enter your allowance.</div>
+        <div class="invalid-feedback" aria-live="assertive">Please enter your allowance.</div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4">
         <div>
-          <label class="form-label" for="monthly_saving">Monthly
-            Savings:</label>
+          <label class="form-label" for="monthly_saving"
+                 aria-label="Monthly savings input field">Monthly Savings:</label>
         </div>
         <div>
           {{ form.monthly_saving }}
-          <p>Current savings: {{ object.monthly_saving}}</p>
+          <p aria-label="Current savings value">Current savings: {{ object.monthly_saving }}</p>
         </div>
       </div>
       <div class="col-md-4">
         <div>
-          <label class="form-label" for="goal_saving">Savings
+          <label class="form-label" for="goal_saving" aria-label="Savings goal input field">Savings
             Goal:</label>
         </div>
         <div>
           {{ form.goal_saving }}
-          <p>Current goal savings: {{ object.goal_saving }}</p>
+          <p aria-label="Current goal savings value">Current goal savings: {{ object.goal_saving }}
+          </p>
         </div>
       </div>
       <div class="col">
         <div>
-          <label class="form-label" for="goal_saving_item">Saving
-            For:</label>
+          <label class="form-label" for="goal_saving_item"
+                 aria-label="Saving for input field">Saving For:</label>
         </div>
         <div>
           {{ form.goal_saving_item }}
-          <p>Saving for: {{ object.goal_saving_item }}</p>
+          <p aria-label="Saving for value">Saving for: {{ object.goal_saving_item }}</p>
         </div>
       </div>
       <div class="text-center pt-3">
-        <button type="submit" class="btn btn-primary mt-4 btn-lg w-50">Update Budget</button>
+        <button type="submit" class="btn btn-primary mt-4 btn-lg w-50"
+                aria-label="Update budget button">Update Budget</button>
       </div>
   </form>
 </section>

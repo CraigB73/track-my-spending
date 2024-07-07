@@ -9,15 +9,15 @@
 
 
 {% block content %}
-<div class="budget-container mx-3 mt-5 flex-xs-column flex-sm-column ">
+<div class="budget-container mx-3 mt-5 flex-xs-column flex-sm-column">
   <div class="d-flex flex-column budget_card mt-5 p-3 container d-lg-flex flex-lg-column">
-    <h1 class="display-4 text-center mb-4">Create Your Budget</h1>
-    <form class="needs-validation d-grid " method="post" action="">
+    <h1 class="display-4 text-center mb-4" aria-level="1">Create Your Budget</h1>
+    <form class="needs-validation d-grid " method="post" action="" aria-label="Create Budget Form">
       {% csrf_token %}
       <div class="row">
         <div class="col-md-4">
           <div>
-            <label class="form-label" for="income">Income:</label>
+            <label class="form-label" for="income" aria-label="Income input field">Income:</label>
           </div>
           <div>
             {{ form.income }}
@@ -25,7 +25,8 @@
         </div>
         <div class="col-md-4">
           <div>
-            <label class="form-label" for="expense">Expenses:</label>
+            <label class="form-label" for="expense"
+                   aria-label="Expenses input field">Expenses:</label>
           </div>
           <div>
             {{ form.expense }}
@@ -33,20 +34,20 @@
         </div>
         <div class="col-md-4">
           <div>
-            <label class="form-label" for="allowance">Mothly
-              Allowance:</label>
+            <label class="form-label" for="allowance"
+                   aria-label="Monthly Allowance input field">Mothly Allowance:</label>
           </div>
           <div>
             {{ form.allowance }}
           </div>
-          <div class="invalid-feedback">Please enter your allowance.</div>
+          <div class="invalid-feedback" aria-live="polite">Please enter your allowance.</div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
           <div>
-            <label class="form-label" for="monthly_saving">Monthly
-              Savings:</label>
+            <label class="form-label" for="monthly_saving"
+                   aria-label="Monthly Savings input field">Monthly Savings:</label>
           </div>
           <div>
             {{ form.monthly_saving }}
@@ -54,8 +55,8 @@
         </div>
         <div class="col-md-4">
           <div>
-            <label class="form-label" for="goal_saving">Savings
-              Goal:</label>
+            <label class="form-label" for="goal_saving"
+                   aria-label="Savings Goal input field">Savings Goal:</label>
           </div>
           <div>
             {{ form.goal_saving }}
@@ -63,8 +64,8 @@
         </div>
         <div class="col">
           <div>
-            <label class="form-label" for="goal_saving_item">Saving
-              For:</label>
+            <label class="form-label" for="goal_saving_item"
+                   aria-label="Saving For input field">Saving For:</label>
           </div>
           <div>
             {{ form.goal_saving_item }}
@@ -73,62 +74,68 @@
         <div class="text-center pt-3">
           {% if messages %}
           {% for message in messages %}
-          <div class="text-warning alert alert-{{ message.tags }} mb-0">
+          <div class="text-warning alert alert-{{ message.tags }} mb-0" aria-label="Warning message"
+               aria-live="polite">
             {{ message }}
             <button type="button" id="clear-messages" class="close btn btn-success"
-                    data-dismiss="alert" aria-label="Close">
+                    aria-label="Close warning message" data-dismiss="alert">
               <span aria-hidden="true">Ok</span>
             </button>
           </div>
           {% endfor %}
           {% endif %}
-          <button type="submit" class="btn btn-primary col-12 px-3 col-md-4">Create Budget</button>
+          <button type="submit" class="btn btn-primary col-12 px-3 col-md-4"
+                  aria-label="Create Budget">Create Budget</button>
         </div>
     </form>
   </div>
   <div class="container mb-4">
     <div class="col-12 table-responsive card-body">
-      <h2>Bookkeeping Journal</h2>
+      <h2 aria-level="2">Bookkeeping Journal</h2>
       <div class="overflow-y-auto table-wrapper">
-        <table class="table table-hover table-bordered">
+        <table class="table table-hover table-bordered" aria-label="Bookkeeping Journal table">
           <thead class="table-secondary">
             <tr class="text-center">
-              <th>Date</th>
-              <th>Income</th>
-              <th>Expenses</th>
-              <th>Savings</th>
-              <th>Allowance</th>
+              <th aria-label="Date column">Date</th>
+              <th aria-label="Income column">Income</th>
+              <th aria-label="Expenses column">Expenses</th>
+              <th aria-label="Savings column">Savings</th>
+              <th aria-label="Allowance column">Allowance</th>
               {% for budget in budgets %}
               {% if budget.goal_saving %}
-              <th>Saving for:<br> <span>{{ budget.goal_saving_item}}</span> </th>
+              <th aria-label="Saving for {{ budget.goal_saving_item }} column">Saving for:<br>
+                <span>{{ budget.goal_saving_item}}</span>
+              </th>
               {% else %}
               <th class="d-none"></th>
               {% endif %}
               {% endfor %}
-              <th>Delete/Update</th>
+              <th aria-label="Delete/Update column">Delete/Update</th>
             </tr>
           </thead>
           <tbody class="table-striped text-center">
             {% for budget in budgets %}
             <tr>
-              <td>{{ budget.created_on|date:"M d, Y" }}</td>
-              <td>{{ budget.income }}</td>
-              <td>{{ budget.expense }}</td>
-              <td>{{ budget.monthly_saving }}</td>
-              <td>{{ budget.allowance }}</td>
+              <td aria-label="Date:">{{ budget.created_on|date:'M d, Y' }}</td>
+              <td aria-label="Income">{{ budget.income }}</td>
+              <td aria-label="Expenses">{{ budget.expense }}</td>
+              <td aria-label="Savings"></td>
+              <td aria-label="Allowance">{{ budget.allowance }}</td>
               {% if budget.goal_saving %}
-              <td>{{ budget.goal_saving}}</td>
+              <td aria-label="Saving for">{{ budget.goal_saving }}</td>
               {% else %}
               <td class="d-none"></td>
               {% endif %}
               <td class="d-flex gap-2 justify-content-center">
                 <form action="{% url 'delete_budget' budget.id %}" method="post">
                   {% csrf_token %}
-                  <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                  <button class="btn btn-danger btn-sm" aria-label="Delete budget"
+                          type="submit">Delete</button>
                 </form>
                 <form action="{% url 'update_budget' budget.id %}" method="post">
                   {% csrf_token %}
-                  <button class="btn btn-primary btn-sm " type="submit">Update</button>
+                  <button class="btn btn-primary btn-sm " aria-label="Update budget"
+                          type="submit">Update</button>
                 </form>
               </td>
             </tr>

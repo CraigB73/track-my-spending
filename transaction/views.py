@@ -10,11 +10,18 @@ from django.db.models import Sum #Used in get_transaction_data
 
 @login_required
 def transaction_view(request): 
-    #Queries the budget model to use allowance created within the budget  
+    """
+    Check that the user created a budget before user
+    can log transactions
+    """
     try:
         budget = Budget.objects.get(user=request.user)
+        budget_created = True 
     except Budget.DoesNotExist:
-        return render(request, 'transaction/transaction.html')
+        budget_created = False
+    
+    if not budget_created:    
+       return render(request, 'transaction/transaction.html')
     
     allowance = budget.allowance
     budget.save()
@@ -56,7 +63,8 @@ def transaction_view(request):
             "total_transaction": total_transactions,
             "remaining_allowance": allowance_remaining,
             "list_transactions": list_transactions,
-            "saved": True
+            "saved": True,
+            'budget_created': budget_created
             })
 """
 Defers the response back to the client by using revers_lazy redirectiing user back to

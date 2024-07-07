@@ -38,7 +38,6 @@ Login: [TMS](https://track-my-spending-2651d262fa88.herokuapp.com/)
 ## Data Model 
 The core functionality of TMS (Transaction Management System) is built around two essential models that empower users to:
 These two models are:
-
 - Budget Model
 - Transaction Model
   
@@ -74,7 +73,6 @@ Testing of Track My Spending was done manually by:
 - https://pagespeed.web./
 
 ## Bugs
-
 - No bugs on deployment were detected.
   
 ## Deployment 

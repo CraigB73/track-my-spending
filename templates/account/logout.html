@@ -2,14 +2,13 @@
 {% load allauth i18n %}
 
 {% block content %}
-<div class=" d-flex justify-content-center mx-2 mt-5">
-  <div class="container signin_card mt-5  d-flex flex-column align-items-center p-5 ">
-    <div class="text-center">
-      {% element h1 %}
-      {% trans "Sign Out" %}
-      {% endelement %}
-    </div>
-    <h3>{% trans 'Are you sure you want to sign out?' %}</h3>
+<div class="d-flex justify-content-center mx-2 mt-5">
+  <div class="container signin_card mt-5  d-flex flex-column align-items-center p-5" role="dialog"
+       aria-labelledby="sign-out-title" aria-describedby="sign-out-description">
+    <header class="text-center">
+      <h1 id="sign-out-title">{% trans "Sign Out of Your Account Confirmation" %}</h1>
+    </header>
+    <h3 id="sign-out-description">{% trans 'Are you sure you want to sign out?' %}</h3>
     <div>
       {% url 'account_logout' as action_url %}
       {% element form method="post" action=action_url no_visible_fields=True %}
@@ -17,9 +16,12 @@
       {% csrf_token %}
       {{ redirect_field }}
       {% endslot %}
-      <div>
+      <div class="d-flex justify-content-center">
         {% slot actions %}
-        <button class="btn btn-danger" type="submit" id="log-out">{% trans 'Sign Out'%}</button>
+        <button class="btn btn-danger" type="submit" id="log-out"
+                aria-label="{% trans 'Sign Out of Your Account'%}">{% trans 'Sign Out'%}</button>
+        <a class="btn btn-secondary" href="{% url 'home' %}" id="cancel"
+           aria-label="Cancels signout and returns to home page">{% trans 'Cancel'%}</a>
         {% endslot %}
       </div>
       {% endelement %}

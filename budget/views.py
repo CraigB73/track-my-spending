@@ -93,7 +93,7 @@ class DeleteBudgetView(DeleteView):
     model = Budget
     success_url = reverse_lazy("budget")
     #Ensures that budget belongs to that specific user
-    def get_object(self, queryset=None):
+    def get_object(self, queryset=None): # Help from ChatGBT
         obj = super().get_object(queryset=queryset)
         if not obj.user == self.request.user:
             raise Http404
@@ -105,13 +105,13 @@ class UpdateBudgetView(UpdateView):
     form_class = BudgetForm
     template_name = "budget/update_budget.html"
 
-    def get_object(self, queryset=None):
+    def get_object(self, queryset=None): # Help from ChatGBT
         obj = super().get_object(queryset=queryset)
         if not obj.user == self.request.user:
             raise Http404
         return obj
 
-    def get_form_kwargs(self):
+    def get_form_kwargs(self): # Help from ChatGBT
         kwargs = super().get_form_kwargs()
         kwargs['instance'] = self.get_object()
         return kwargs

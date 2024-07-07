@@ -88,7 +88,7 @@ def delete_transaction(request, pk):
 Retrieves data from the transaction model which is used to
 dynamically updated the Chart.js pie chart.
 """
-@require_GET
+@require_GET # Help from ChatGBT
 def get_transaction_data(request):
     transactions = Transaction.objects.filter(user=request.user)
     # Get each cateory and totals

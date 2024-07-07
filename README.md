@@ -78,9 +78,9 @@ Testing of Track My Spending was done manually by:
 <div align="left" style="margin-left:40px;"><img src="static/images/performance.png" width=300 height=300></div>
 
 ## Bugs
-- Used [ChatGBT](https://chat.openai.com/) for debugging and help with fixing errors and more advanced sytanx.
+- Used [ChatGBT](https://chat.openai.com/) for debugging and help with fixing code errors with more advanced sytanx.
 - Minor linting errors with-in Apps view.py are still present.
-- No bugs to logic upon deployment were detected.
+- Only one bug found with one notification message displayed not a real ran out of time to solve the issue(DOES NOT EFFECT PROGRESS OF THE APP FLOW). Will have to resolve later. User is able to remove when neccessary.
   
 ## Deployment 
 This project is designed to be deployed on [HEROKU](heroku.com/apps) using a Dyno. To deploy, follow these steps:

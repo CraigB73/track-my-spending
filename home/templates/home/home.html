@@ -25,16 +25,15 @@
     </div>
     <div class="col-md-6 col-12">
       <a class="btn btn-outline-secondary w-100" aria-label="Learn More" aria-current="page"
-         href="{% url 'about' %}">Learn
-        More</a>
+         href="{% url 'about' %}">Learn More</a>
     </div>
   </div>
 </div>
 <!-- Card Section -->
 <div id="section-two" class="container-fluid pb-3">
-  <div class="card bg-transparent border-0 ">
+  <div class="card bg-transparent border-0">
     <div class="row d-flex align-items-center justify-content-center m-3 mt-5">
-      <div class="col-sm-7 ">
+      <div class="col-sm-7">
         <img src="{% static 'images/card_image.png' %}" class="img-fluid rounded-start"
              alt="Man sitting in office looking at tablet"
              aria-label="Man sitting in office looking at tablet">
@@ -58,9 +57,7 @@
         <div class="icon-info">
           <div class="card card-body bg-transparent border-0">
             <h5>Track Spending</h5>
-            <p>
-              Monitor your expenses in real-time with our intuitive tools.
-            </p>
+            <p>Monitor your expenses in real-time with our intuitive tools.</p>
           </div>
         </div>
       </button>
@@ -73,9 +70,7 @@
         <div class="icon-info">
           <div class="card card-body bg-transparent border-0">
             <h5>Save Smartly</h5>
-            <p>
-              Get personalized savings tips and incentives.
-            </p>
+            <p>Get personalized savings tips and incentives.</p>
           </div>
         </div>
       </button>
@@ -88,9 +83,7 @@
         <div class="icon-info">
           <div class="card card-body bg-transparent border-0">
             <h5>Budget Efficiently</h5>
-            <p class="d-sm-none d-md-block">
-              Create and manage your budget to achieve financial freedom.
-            </p>
+            <p>Create and manage your budget to achieve financial freedom.</p>
           </div>
         </div>
       </button>
@@ -99,10 +92,22 @@
   <p class="text-center">Hover for more info!</p>
 </div>
 
-{% block footer %}
-<footer class="bg-black" style="height: 50px;" aria-label="Footer">
-  <!-- Add footer content here -->
-</footer>
-{% endblock footer %}
 
 {% endblock %}
+{% block footer %}
+<footer class="text-white py-4" style="height: 150px;" aria-label="Footer">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center ">
+        <h3>Track My Spending</h3>
+        <p>&copy; 2024 Craig Britton</p>
+        <div class="d-flex justify-content-center pt-2">
+          <a class="text-white me-3" aria-label="Budget Page" href="{% url 'about' %}">About</a>
+          <a class="text-white me-3" aria-label="Budget Page" href="{% url 'budget' %}">Budget</a>
+          <a class="text-white" aria-label="Transaction Page"
+             href="{% url 'transaction' %}">Transactions</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock footer %}

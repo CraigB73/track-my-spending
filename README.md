@@ -74,7 +74,8 @@ Testing of Track My Spending was done manually by:
 <div align="left" style="margin-left:40px;"><img src="static/images/performance.png" width=300 height=300></div>
 
 ## Bugs
-- No bugs on deployment were detected.
+- Linting errors with in view.py(s)
+- No bugs to logic upon deployment were detected.
   
 ## Deployment 
 This project is designed to be deployed on [HEROKU](heroku.com/apps) using a Dyno. To deploy, follow these steps:

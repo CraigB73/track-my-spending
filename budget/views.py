@@ -5,25 +5,29 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from datetime import datetime
 from django.views.generic import View, UpdateView, DeleteView
-from.forms import BudgetForm
-from.models import Budget
+from .forms import BudgetForm
+from .models import Budget
 
-"""
-This view was refactor to a class view with help of ChatGBT for better understanding.
-"""
+
+# This view was refactor to a class view
+# With help of ChatGBT for better understanding.
 class BudgetView(View):
     template_name = "budget/budget.html"
     form_class = BudgetForm
+
     """
     Access the budget model obj. If budget obj exist.
-    Check the current month/year to ensure user only creates one budget the existing month.
-    Retrieved save budget data to be displayed in budget tempalates
+    Check the current month/year to ensure user only 
+    creates one budget for existing month.
     """
     def get(self, request):
         current_month = datetime.now().month
         current_year = datetime.now().year
 
-        existing_budget = Budget.objects.filter(user=request.user, created_on__year=current_year, created_on__month=current_month).exists()
+        existing_budget = Budget.objects.filter(
+            user=request.user, 
+            created_on__year=current_year, 
+            created_on__month=current_month).exists()
 
         if existing_budget:
             budgets = Budget.objects.filter(user=request.user, created_on__year=current_year, created_on__month=current_month)

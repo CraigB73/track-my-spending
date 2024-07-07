@@ -3,8 +3,9 @@
 ## Description 
 
 **Track My Spending(TMS)** 
+This Django project is a web-based expense tracker application that allows users to create and manage their personal budgets. Users can set up budgets for different expense categories and track their daily transactions by entering purchases. The application provides a simple and intuitive interface for users to monitor their spending habits and stay within their budget.
 
-<div align="center"><img src= "./assets/screenshots/" width=700 height=500></div>
+<div align="center"><img src= "assets/images/mockdevice.png" width=700 height=500></div>
 
 Login: [TMS](https://track-my-spending-2651d262fa88.herokuapp.com/)
 
@@ -14,7 +15,7 @@ Login: [TMS](https://track-my-spending-2651d262fa88.herokuapp.com/)
 2. [Table of Content](#table-of-content)
 3. [Features](#features)
 4. [Data Model](#data-model)
-5. [Libraries.](#libraries)
+5. [Libraries:](#libraries)
 6. [Testing](#testing)
 7. [Bugs](#bugs)
 8. [Deployment](#deployment)
@@ -22,40 +23,68 @@ Login: [TMS](https://track-my-spending-2651d262fa88.herokuapp.com/)
 
 
 ## Features
-Features in the project as well up coming features
+**Budget Management**
+  The project includes a BudgetForm that allows users to input their income, expense, allowance, monthly saving, goal saving, and goal saving item. Displaying budget within a table format.
 
+**Transaction Management**
+  The project includes a TransactionForm that allows users to input their transaction amount, location, and category. Displaying transaction within a table format.
 
-Login: [TMS](https://track-my-spending-2651d262fa88.herokuapp.com/)
+**Chart Integration**
+  The project includes a chart feature that allows users to visualize their transaction data.
+  The chart is integrated with the transaction forms to provide a seamless user data.
+
+[TMS](https://track-my-spending-2651d262fa88.herokuapp.com/)
 
 ## Data Model 
-TMS main functionality is based of two models that provide the User a platform to
-create a budget with a monthly allowance and track purchases made and categorize each purchase:
+The core functionality of TMS (Transaction Management System) is built around two essential models that empower users to:
+These two models are:
 
-- Budget model
-- Transaction model
+- Budget Model
+- Transaction Model
+  
 <div align="center"><p>Database Rational Diagram</p><img src="./static/images/database_ERD.jpg" width=300 height=300></div>
 
 
-## Libraries.
- *add Dj libraries/imports chartjs used in project*
+## Libraries:
+**For APIs and Intergrations:**
+- Request (for making HTTP Request)
+
+**For Database Management:**
+- Django's built-in ORM (Object-Relational Mapping) system
+- Dj-database-url (for database URL parsing)
+- ElephantSQL (for PostgreSQL database hosting)
+- Psycopg2 (for PostgreSQL database connections)
+  
+**For Authentication Management:**
+- Django Allauth (for authentication and authorization)
+
+**For Web Development:**
+- Django Framework
+- Django Crispy Forms (form rendering and validation)
+- Crispy Bootsrap5 (Bootstrap5 intergration)
+- Whitenoise (serving static files)
+
+**Utilities and Tools:**
+- [Refer to requirements.txt](./requirements.txt)
+
+
 ## Testing
 Testing of Track My Spending was done manually by:
 - Ran code through a [PEP8](https://pep8ci.herokuapp.com/) linter with no major issues.  
--   
-- 
+- https://pagespeed.web./
 
 ## Bugs
 
 - No bugs on deployment were detected.
   
 ## Deployment 
-Deployment was performed using Code Institute's mock terminal for [HEROKU](heroku.com/apps).
-- Deployment steps:
-  1. Created Heroku app
-  2. Settings
-     - Config(Key: Port, Value: 8000)
-     - Buildbacks to <mark>Python</mark> and <mark>NodeJS</mark> in order
-  3. Link the Heroku app to [GitHub repository](https://github.com/CraigB73/track-my-spending.git)
+This project is designed to be deployed on [HEROKU](heroku.com/apps) using a Dyno. To deploy, follow these steps:
+  1. Create a new Heroku app and add a Dyno.
+  2. Install the Heroku CLI and login to your account.
+  3. Create a Procfile with web: gunicorn track_my_spending.wsgi
+  4. Deployed to [HEROKU](heroku.com/apps) using [GitHub branch](https://github.com/CraigB73/track-my-spending.git). 
+    
+  5. Link the Heroku app to [GitHub repository](https://github.com/CraigB73/track-my-spending.git)
 
 Track My Money: [TMS](https://track-my-spending-2651d262fa88.herokuapp.com/)
 

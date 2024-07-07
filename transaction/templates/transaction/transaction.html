@@ -6,15 +6,18 @@
 {% endblock %}
 
 {% block content %}
-<div class="transaction-container m-2 flex-xs-column flex-sm-column"
-     aria-label="Transaction container">
-  {% if not budget_created %}
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+{% if not budget_created %}
+<div class="d-flex justify-content-center">
+  <div class="alert alert-warning alert-dismissible fade show w-75 text-center" role="alert">
     You need to create a budget to log transactions. <a href="{% url 'budget' %}">Create
       Budget</a>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
-  {% endif %}
+</div>
+{% endif %}
+<div class="transaction-container m-2 flex-xs-column flex-sm-column"
+     aria-label="Transaction container">
+
   <div class="transaction-container m-2 flex-xs-column flex-sm-column"
        aria-label="Transaction container">
     <div class="transaction-card mt-5 p-md-3 container d-lg-flex flex-lg-column"

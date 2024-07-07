@@ -8,9 +8,11 @@ from django.views.generic import View, UpdateView, DeleteView
 from .forms import BudgetForm
 from .models import Budget
 
-
-# This view was refactor to a class view
-# With help of ChatGBT for better understanding.
+"""
+This view was refactor to a class view
+with help of ChatGBT for better understanding of the
+difference.
+"""
 class BudgetView(View):
     template_name = "budget/budget.html"
     form_class = BudgetForm
@@ -89,10 +91,10 @@ class BudgetView(View):
 Deferse the repsonse to the client and redirect the user back to the budget
 URL after deletion 
 """
+# The code below was refactor to correct errors, help from ChatGBT
 class DeleteBudgetView(DeleteView):
     model = Budget
     success_url = reverse_lazy("budget")
-    #Ensures that budget belongs to that specific user
     def get_object(self, queryset=None): # Help from ChatGBT
         obj = super().get_object(queryset=queryset)
         if not obj.user == self.request.user:
@@ -104,14 +106,14 @@ class UpdateBudgetView(UpdateView):
     model = Budget
     form_class = BudgetForm
     template_name = "budget/update_budget.html"
-
-    def get_object(self, queryset=None): # Help from ChatGBT
+    # The code below was refactor to correct errors, help from ChatGBT
+    def get_object(self, queryset=None): 
         obj = super().get_object(queryset=queryset)
         if not obj.user == self.request.user:
             raise Http404
         return obj
-
-    def get_form_kwargs(self): # Help from ChatGBT
+    # Created by ChatGBT
+    def get_form_kwargs(self): 
         kwargs = super().get_form_kwargs()
         kwargs['instance'] = self.get_object()
         return kwargs

@@ -13,15 +13,19 @@ Login: [TMS](https://track-my-spending-2651d262fa88.herokuapp.com/)
 
 1. [Description](#description)
 2. [Table of Content](#table-of-content)
-3. [Features](#features)
-4. [Data Model](#data-model)
-5. [Libraries:](#libraries)
-6. [Testing](#testing)
-7. [Bugs](#bugs)
-8. [Deployment](#deployment)
-9. [Credits and Acknowledgements](#credits-and-acknowledgements)
+3. [Design](#design)
+4. [Features](#features)
+5. [Data Model](#data-model)
+6. [Libraries:](#libraries)
+7. [Testing](#testing)
+8. [Bugs](#bugs)
+9. [Deployment](#deployment)
+10. [Credits and Acknowledgements](#credits-and-acknowledgements)
 
+## Design 
+**Figma**
 
+[PP4 Figma Degsin](https://www.figma.com/design/nj7ZJ0YwtFegix8X4PegVN/PP4?m=dev&node-id=0-1&t=983Wc5eoFBOCKgxO-1)
 ## Features
 **Budget Management**
   The project includes a BudgetForm that allows users to input their income, expense, allowance, monthly saving, goal saving, and goal saving item. Displaying budget within a table format.
@@ -74,7 +78,8 @@ Testing of Track My Spending was done manually by:
 <div align="left" style="margin-left:40px;"><img src="static/images/performance.png" width=300 height=300></div>
 
 ## Bugs
-- Linting errors with in view.py(s)
+- Used [ChatGBT](https://chat.openai.com/) for debugging and help with fixing errors and more advanced sytanx.
+- Minor linting errors with-in Apps view.py are still present.
 - No bugs to logic upon deployment were detected.
   
 ## Deployment 

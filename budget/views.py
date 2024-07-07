@@ -76,7 +76,7 @@ class BudgetView(View):
             budget = form.save(commit=False)
             budget.user = request.user
             budget.save()
-            return redirect("budget")
+            return redirect("budget", )
 
 
     """

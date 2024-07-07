@@ -5,7 +5,7 @@
 **Track My Spending(TMS)** 
 This Django project is a web-based expense tracker application that allows users to create and manage their personal budgets. Users can set up budgets for different expense categories and track their daily transactions by entering purchases. The application provides a simple and intuitive interface for users to monitor their spending habits and stay within their budget.
 
-<div align="center"><img src= "assets/images/mockdevice.png" width=700 height=500></div>
+<div align="center"><img src= "static/images/mockdevice.png" width=700 height=500></div>
 
 Login: [TMS](https://track-my-spending-2651d262fa88.herokuapp.com/)
 
@@ -70,7 +70,8 @@ These two models are:
 ## Testing
 Testing of Track My Spending was done manually by:
 - Ran code through a [PEP8](https://pep8ci.herokuapp.com/) linter with no major issues.  
-- https://pagespeed.web./
+- Performance Diagnostic: [PageSpeed Insights](https://pagespeed.web.dev/analysis/https-track-my-spending-2651d262fa88-herokuapp-com/c8z0i67r3c?form_factor=desktop)
+<div align="left" style="margin-left:40px;"><img src="static/images/performance.png" width=300 height=300></div>
 
 ## Bugs
 - No bugs on deployment were detected.

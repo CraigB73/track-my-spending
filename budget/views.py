@@ -68,6 +68,7 @@ class BudgetView(View):
 
         if existing_budget:
             messages.error(request, "You can only create one monthly budget. You are able to update your current budget if needed.")
+            request.session.pop('messages', [])
             return redirect("budget")
 
         form = self.form_class(request.POST)
